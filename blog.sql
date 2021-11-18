@@ -160,7 +160,7 @@ CREATE TABLE `article` (
   `img` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '封面地址',
   `original` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '是否原创',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `article` */
 
@@ -183,17 +183,21 @@ CREATE TABLE `user` (
   `role` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT 'user',
   `perms` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT 'use',
   `status` tinyint(1) DEFAULT '1',
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `token` varchar(999) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `deleted` int DEFAULT '0' COMMENT '逻辑删除',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `user` */
 
-insert  into `user`(`id`,`userid`,`password`,`role`,`perms`,`status`,`token`) values 
-(1,'Gleam','123','admin','manage',1,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyaWQiOiJHbGVhbSIsInJvbGUiOiJhZG1pbiIsInBlcm1zIjoibWFuYWdlIiwic3ViIjoiaGVsbG8iLCJpYXQiOjE2MzY4NjM2NTcsImV4cCI6MTYzNjk1MDA1NywianRpIjoiNTZiYTgzYTMtMWQ1Mi00ZGM0LTk4NDctY2ViNzNlM2VjYWM5In0.zcM57BV_UZ5ZHWMFCoNpxsS4XqHtrK5GGeiSvxzpWiYSJE-UHRadkY6G8A92ZDy7rjHfFwSo_yasBu5-57rPDQ'),
-(2,'admin','123','admin','manage',1,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyaWQiOiJhZG1pbiIsInJvbGUiOiJhZG1pbiIsInBlcm1zIjoibWFuYWdlIiwic3ViIjoiaGVsbG8iLCJpYXQiOjE2MzY4NTc5NTAsImV4cCI6MTYzNjk0NDM1MCwianRpIjoiMjc1Y2RiMzMtMzc4MS00NjJjLWIzODEtZjI3ODFjOWY0NGMyIn0.eVq97C2EYVP6Z0M5mSYankhQckceDz3uzOPjWh01SUEcXmx1C1gnw6m9zSP4yIHYjXIKG_r-UFPurtP4p2u5rQ'),
-(3,'user','123','user','use',0,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyaWQiOiJ1c2VyIiwicm9sZSI6InVzZXIiLCJwZXJtcyI6InVzZSIsInN1YiI6ImhlbGxvIiwiaWF0IjoxNjM2ODA3NTI4LCJleHAiOjE2MzY4OTM5MjgsImp0aSI6ImVmYTUzYmIxLTM4YTItNDA0Yy1hZWIzLTgyNmYzZGYwNTkxYiJ9.SS-_-sIXSdya2HAlpf4YvxMordkUwjn3UvavnbUCziM9LipOeZ6NneZCmCoGt2n4spysFT9UhwG4l8C8A1PO-g'),
-(6,'lw666','123','user','use',1,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyaWQiOiJsdzY2NiIsInJvbGUiOiJ1c2VyIiwicGVybXMiOiJ1c2UiLCJzdWIiOiJoZWxsbyIsImlhdCI6MTYzNjg2NjA0NywiZXhwIjoxNjM2OTUyNDQ3LCJqdGkiOiIyY2VhYmIwMS03MjdkLTQwNWMtODlkNC00ZDYyMWE3M2Y4OWYifQ.4QYze2lgF3Fy2OxR3yfRw-hMutEC3rK6fVuqAkUjnaedewbxxrLD8pblGcEDPYv6IMUvT1uInVwfLDWVehO54g');
+insert  into `user`(`id`,`userid`,`password`,`role`,`perms`,`status`,`email`,`token`,`deleted`) values 
+(1,'Gleam','136189','admin','manage',1,'lw666@163.com','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyaWQiOiJHbGVhbSIsInJvbGUiOiJhZG1pbiIsInBlcm1zIjoibWFuYWdlIiwic3ViIjoiaGVsbG8iLCJpYXQiOjE2MzcyMzQ1MjYsImV4cCI6MTYzNzMyMDkyNiwianRpIjoiZmQ5NDVlYWUtMGY3NS00MjdmLWI0MjctMDg4MGVjM2ZmMWRjIn0.QeWQM20lvyqb4u6MgT5CmRDH4h7x7JifgUnPYzYqU5hbczlxfRPO2npcHZQ9eMGmCNRjciHP6-tNYEpT70vtMQ',0),
+(2,'admin','123','admin','manage',0,NULL,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyaWQiOiJhZG1pbiIsInJvbGUiOiJhZG1pbiIsInBlcm1zIjoibWFuYWdlIiwic3ViIjoiaGVsbG8iLCJpYXQiOjE2MzY4NTc5NTAsImV4cCI6MTYzNjk0NDM1MCwianRpIjoiMjc1Y2RiMzMtMzc4MS00NjJjLWIzODEtZjI3ODFjOWY0NGMyIn0.eVq97C2EYVP6Z0M5mSYankhQckceDz3uzOPjWh01SUEcXmx1C1gnw6m9zSP4yIHYjXIKG_r-UFPurtP4p2u5rQ',0),
+(3,'user','123','user','use',0,NULL,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyaWQiOiJ1c2VyIiwicm9sZSI6InVzZXIiLCJwZXJtcyI6InVzZSIsInN1YiI6ImhlbGxvIiwiaWF0IjoxNjM2ODA3NTI4LCJleHAiOjE2MzY4OTM5MjgsImp0aSI6ImVmYTUzYmIxLTM4YTItNDA0Yy1hZWIzLTgyNmYzZGYwNTkxYiJ9.SS-_-sIXSdya2HAlpf4YvxMordkUwjn3UvavnbUCziM9LipOeZ6NneZCmCoGt2n4spysFT9UhwG4l8C8A1PO-g',0),
+(6,'lw666','123','user','use',1,NULL,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyaWQiOiJsdzY2NiIsInJvbGUiOiJ1c2VyIiwicGVybXMiOiJ1c2UiLCJzdWIiOiJoZWxsbyIsImlhdCI6MTYzNjk3NTU3NSwiZXhwIjoxNjM3MDYxOTc1LCJqdGkiOiI2MTc0ZjY1Ni0wYzE0LTRjZTYtYjQxMy1lYTQzZTg2MDlhYTAifQ.rRTmMieqClxwMX542Kwf1iufqjEHffJ46iTy5I1M0-oJYdtuM-v2XOxucEbR-BrOcqxna-8Z6rACgSkK3Pg0oA',0),
+(7,'test','123','user','use',1,NULL,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyaWQiOiJ0ZXN0Iiwicm9sZSI6InVzZXIiLCJwZXJtcyI6InVzZSIsInN1YiI6ImhlbGxvIiwiaWF0IjoxNjM3MjAzMjgzLCJleHAiOjE2MzcyODk2ODMsImp0aSI6IjIzYTMyYjJlLTdmYzktNDMyZi1hMGEwLTkyYWU4MTg2MjRhMSJ9.4nDXkiVOejvqy5F5EsQjVedMOoSJabmRgvWveKLgNjfruW2gN2zp9AnYBgJYA5Ng5LtY19mwuxr3u2FX2bS3wg',0),
+(8,'dele','123','user','use',1,NULL,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyaWQiOiJkZWxlIiwicm9sZSI6InVzZXIiLCJwZXJtcyI6InVzZSIsInN1YiI6ImhlbGxvIiwiaWF0IjoxNjM3MjM2NDc2LCJleHAiOjE2MzczMjI4NzYsImp0aSI6IjMwYjEyNWY5LWIyNWYtNGU1Yi1hZmQ2LWQ1YzdhYzI2OGRjMSJ9.hULe1_mTGkqM-XTELjpQNp0iCFSB87RHfeuuCn7EqeJB95xpgwWgKKi0FLSkWIdcShbuvcUkMt0OBp57cs9VYQ',1);
 
 /*Table structure for table `userinfo` */
 
@@ -205,17 +209,22 @@ CREATE TABLE `userinfo` (
   `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
   `role` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT '普通用户' COMMENT '角色',
   `avatar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png' COMMENT '头像',
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '邮箱',
+  `sex` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT '未选择' COMMENT '性别',
+  `introduction` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT '未填写' COMMENT '简介',
+  `birth` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT '未选择' COMMENT '出生日期',
+  `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT '未选择' COMMENT '所在地区',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `userinfo` */
 
-insert  into `userinfo`(`id`,`userid`,`username`,`role`,`avatar`,`email`) values 
-(1,'Gleam','普通上班族','超级管理员','https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',NULL),
-(2,'admin','小明','管理员','https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',NULL),
-(3,'user','张三','普通用户','https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',NULL),
-(6,'lw666','博客用户_cjq2x','普通用户','https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',NULL);
+insert  into `userinfo`(`id`,`userid`,`username`,`role`,`avatar`,`sex`,`introduction`,`birth`,`address`) values 
+(1,'Gleam','普通上班族','超级管理员','http://localhost:9090/userinfo/ff1ff1500e974ce2ab3b4a0bbfb4f560','男','这个人很懒，还没有留下个人简介。','2001年03月11日','江苏省苏州市常熟市'),
+(2,'admin','小明','管理员','https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png','未选择','未填写','未选择','未选择'),
+(3,'user','张三','普通用户','https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png','未选择','未填写','未选择','未选择'),
+(6,'lw666','博客用户_cjq2x','普通用户','https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png','未选择','未填写','未选择','未选择'),
+(7,'test','博客用户_aVuC5','普通用户','https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png','未选择','未填写','未选择','未选择'),
+(8,'dele','博客用户_13Pwq','普通用户','https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png','未选择','未填写','未选择','未选择');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

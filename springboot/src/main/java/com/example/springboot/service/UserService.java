@@ -15,4 +15,8 @@ public interface UserService {
 
     Result insert(User user);
 
+    Result update(User user);
+
+    Result<User> deleteUser(String id);
+
 }

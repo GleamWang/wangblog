@@ -1,11 +1,9 @@
 package com.example.springboot.controller;
 
 import com.example.springboot.conf.Result;
-import com.example.springboot.entity.User;
 import com.example.springboot.entity.UserInfo;
 import com.example.springboot.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 

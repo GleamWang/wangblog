@@ -1,3 +1,0 @@
-window.server = {
-    ip: "localhost"
-}

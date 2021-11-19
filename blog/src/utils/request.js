@@ -33,8 +33,28 @@ request.interceptors.response.use(
         return res;
     },
     error => {
-        console.log('err' + error) // for debug
-        return Promise.reject(error)
+        // console.log('err' + error) // for debug
+        // return Promise.reject(error)
+        if (error && error.response) {
+            switch (error.response.status) {
+                case 404:
+                    router.push({
+                        name: '404',
+                    });
+                    // error.message = '请求出错(404)'
+                    break;
+
+                case 500:
+                    router.push({
+                        name: '500',
+                    });
+                    //  error.message = '服务器错误(500)';
+                    break;
+
+                default: error.message = `连接出错(${error.response.status})!`;
+            }
+        }
+        return Promise.reject(error);
     }
 )
 

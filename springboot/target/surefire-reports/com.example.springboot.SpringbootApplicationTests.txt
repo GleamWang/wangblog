@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.example.springboot.SpringbootApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.366 s - in com.example.springboot.SpringbootApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.919 s - in com.example.springboot.SpringbootApplicationTests

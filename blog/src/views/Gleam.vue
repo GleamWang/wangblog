@@ -8,7 +8,7 @@
     <About name="关于作者" />
   </div>
   <div style="display: flex; width: 70%; margin: 0 auto">
-    <div id="classify-block">
+    <div id="classify-block" style="width: 70%">
       <div class="single-block">
         <h2>#个人简介</h2>
         <div class="demo-collapse">
@@ -57,14 +57,30 @@
               >
             </div>
           </template>
-          <div class="text item" style="margin-bottom: 10px;text-decoration:line-through">
+          <div
+            class="text item"
+            style="margin-bottom: 10px; text-decoration: line-through"
+          >
             个人中心头像上传功能
           </div>
-          <div class="text item" style="margin-bottom: 10px;text-decoration:line-through">
+          <div
+            class="text item"
+            style="margin-bottom: 10px; text-decoration: line-through"
+          >
             完善用户信息数据库
           </div>
-          <div class="text item" style="margin-bottom: 10px">
+          <div class="text item" style="margin-bottom: 10px; text-decoration: line-through">
             实现个人中心菜单功能
+          </div>
+          <div class="text item" style="margin-bottom: 10px; text-decoration: line-through">
+            实现独立的搜索页面
+          </div>
+          <div class="text item" style="margin-bottom: 10px">
+            实现后台管理系统可视化
+          </div>
+          <div class="text item" style="margin-bottom: 10px">加载页面</div>
+          <div class="text item" style="margin-bottom: 10px">
+            博客在线修改功能
           </div>
           <div class="text item" style="margin-bottom: 10px">
             完善主分类页面
@@ -84,23 +100,35 @@
               >
             </div>
           </template>
-          <div class="text item" style="margin-bottom: 10px;text-decoration:line-through">
+          <div
+            class="text item"
+            style="margin-bottom: 10px; text-decoration: line-through"
+          >
             创作页面上传图片会直接提交到服务器
           </div>
-          <div class="text item" style="margin-bottom: 10px;text-decoration:line-through">
+          <div
+            class="text item"
+            style="margin-bottom: 10px; text-decoration: line-through"
+          >
             创作页面上传器无法在挂载前读取全局配置
           </div>
-          <div class="text item" style="margin-bottom: 10px;text-decoration:line-through">
+          <div
+            class="text item"
+            style="margin-bottom: 10px; text-decoration: line-through"
+          >
             全局变量会在刷新后失效
           </div>
-          <div class="text item" style="margin-bottom: 10px">
+          <div
+            class="text item"
+            style="margin-bottom: 10px; text-decoration: line-through"
+          >
             右侧信息块float:left不生效
           </div>
         </el-card>
       </div>
     </div>
 
-    <div style="width: 40%">
+    <div style="width: 30%">
       <div style="margin: 0 auto"><SelfBlock /><InfoBlock /><TagBlock /></div>
     </div>
   </div>

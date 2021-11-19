@@ -31,7 +31,7 @@ export default {
 .info_block {
   margin-top: 20px;
   margin-left: 20px;
-  max-width: 300px;
+  width: 300px;
   box-shadow: border-box;
   background: rgba(255, 255, 255, 1);
   border-radius: 10px;

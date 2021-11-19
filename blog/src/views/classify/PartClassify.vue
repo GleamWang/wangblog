@@ -39,7 +39,7 @@
         layout="total, prev, pager, next, jumper"
         @current-change="handleCurrentChange"
         :current-page="currentPage"
-        :page-sizes="[5, 10, 20, 50, 250]"
+        :page-sizes="[5, 10, 20, 50, 100]"
         :page-size="pageSize"
         :total="total"
         align="center"

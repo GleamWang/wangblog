@@ -21,7 +21,7 @@
         {{ this.title }}
       </div>
       <div style="flex: 1"></div>
-      <div style="margin-top: 6.5px; margin-right: 20px">
+      <div style="margin-top: 6.5px; margin-right: 20px" v-show="inputStatus">
         <el-input
           placeholder="请输入内容"
           v-model="input"
@@ -180,7 +180,6 @@
             </li>
             <li>
               <el-button
-                disabled
                 type="text"
                 class="el-icon-star-on"
                 size="medium"
@@ -277,6 +276,11 @@ export default {
     // window.addEventListener("mousewheel", this.handleWheel);
     // window.addEventListener("scroll", this.handleScroll, true);
   },
+    computed: {
+    inputStatus() {
+      return this.$store.state.inputStatus
+    }
+  },
   methods: {
     uploadSuccess() {},
     // handleWheel(e) {
@@ -297,7 +301,7 @@ export default {
     setSearch() {
       this.$store.commit("newSearch", this.input);
       this.input = "";
-      this.$router.push("/blogs");
+      this.$router.push("/result");
     },
     // handleScroll(e) {
     //   // 滚动条距顶部距离

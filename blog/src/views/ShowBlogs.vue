@@ -3,8 +3,8 @@
     <div id="show-blogs">
       <div v-for="item in tableData" class="single-blog" :key="item.id" @click="pushArticle(item)">
         <div style="display: flex">
-          <div style="width: 30%">
-            <el-image style="" :src="item.img">
+          <div style="width: 30%" align=center>
+            <el-image style="height:100px" :src="item.img">
               <template #error>
                 <div class="image-slot">
                   <i class="el-icon-picture-outline"></i>
@@ -13,8 +13,8 @@
             </el-image>
           </div>
           <div style="margin-left: 20px; width: 70%">
-            <h2 class="title">{{ item.title }}</h2>
-            <div style="margin-top: 10px">
+            <h1 class="title">{{ item.title }}</h1>
+            <div style="margin-top: 15px">
               <span class="el-icon-date">发表于{{ item.time1 }}</span>
               <el-divider direction="vertical"></el-divider>
               <span class="el-icon-user">{{ item.author }}</span>
@@ -28,7 +28,7 @@
         </div>
 
         <div style="margin-top: 20px">
-          <span>{{ item.content1.slice(0, 200) + "..." }}</span>
+          <span>{{ item.content1.slice(0, 300) + "..." }}</span>
           <!-- <span v-text="item.content1"></span> -->
           <!-- <span v-html="item.content2"></span> -->
         </div>
@@ -39,7 +39,7 @@
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         :current-page="currentPage"
-        :page-sizes="[5, 10, 20, 50, 250]"
+        :page-sizes="[5, 10, 20, 50, 100]"
         :page-size="pageSize"
         layout="total, sizes, prev, pager, next, jumper"
         :total="total"
@@ -62,16 +62,18 @@ export default {
       total: 0,
       tableData: [],
       pageSize: 10,
+      search: '',
     };
   },
   created() {
     this.load();
+    this.$store.commit("newStatus", 1);
   },
-  computed: {
-    search() {
-      return this.$store.state.search
-    }
-  },
+  // computed: {
+  //   search() {
+  //     return this.$store.state.search
+  //   }
+  // },
   watch:{
     search:'load'
   },

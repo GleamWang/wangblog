@@ -75,7 +75,7 @@ export default {
   color: white;
 }
 .content {
-  width: 50%;
+  width: 70%;
   padding: 30px;
   margin: 0 auto;
   box-shadow: border-box;

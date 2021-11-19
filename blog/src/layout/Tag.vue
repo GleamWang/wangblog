@@ -8,10 +8,10 @@
     <About name="标 签" />
   </div>
   <div style="display: flex; width: 70%; margin: 0 auto">
-    <div style="width: 60%">
+    <div style="width: 70%">
       <router-view />
     </div>
-    <div style="width: 40%">
+    <div style="width: 30%">
       <div style="margin: 0 auto"><SelfBlock /><WarnBlock /><InfoBlock /><TagBlock /></div>
     </div>
   </div>

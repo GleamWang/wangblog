@@ -3,6 +3,7 @@ import Layout from '../layout/Layout.vue'
 import Classify from '../layout/Classify.vue'
 import Space from '../layout/Space.vue'
 import Tag from '../layout/Tag.vue'
+import Error from '../layout/Error.vue'
 import axios from 'axios'
 
 const routes = [
@@ -95,6 +96,29 @@ const routes = [
       },
     ]
   },
+
+  {
+    path: '/error',
+    name: 'Error',
+    component: Error,
+    children: [
+      {
+        path: '404',
+        name: '404',
+        component: () => import("@/views/error/404")
+      },
+      {
+        path: '500',
+        name: '500',
+        component: () => import("@/views/error/404")
+      },
+      {
+        path: 'null',
+        name: 'Null',
+        component: () => import("@/views/error/null")
+      },
+    ]
+  },
   {
     path: '/creation',
     name: 'Creation',
@@ -112,6 +136,12 @@ const routes = [
     path: '/article/:id',
     name: 'Article',
     component: () => import("@/views/Article"),
+    props: true
+  },
+  {
+    path: '/result',
+    name: 'Result',
+    component: () => import("@/views/Result"),
     props: true
   },
   {
@@ -138,6 +168,11 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: () => import("@/views/Register")
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'none',
+    redirect: '/error/null',
   },
 ]
 

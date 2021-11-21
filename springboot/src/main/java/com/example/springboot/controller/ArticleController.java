@@ -1,8 +1,10 @@
 package com.example.springboot.controller;
 
+import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.springboot.conf.Result;
 import com.example.springboot.entity.Article;
+import com.example.springboot.entity.MyNum;
 import com.example.springboot.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 
 @RestController()
@@ -71,5 +74,25 @@ public class ArticleController {
                                         @RequestParam("category") String category) {
         Page<Article> categoryPage = articleService.findPageByCategory(pageNum, pageSize, category);
         return Result.success(categoryPage);
+    }
+
+    @GetMapping("/selectMyNum")
+    public MyNum findMyArticleNum(){
+        return articleService.findMyArticleNum("Gleam");
+    }
+
+    @PutMapping
+    public Result update(@RequestBody Article article){
+        return articleService.update(article);
+    }
+
+    @DeleteMapping("/{id}")
+    public Result update(@PathVariable Long id){
+        return articleService.deleted(id);
+    }
+
+    @DeleteMapping("/deleteIds")
+    public Result deleteIds(@RequestParam(value = "selection") String[] selection){
+        return articleService.deleteIds(selection);
     }
 }

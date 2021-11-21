@@ -3,8 +3,13 @@ package com.example.springboot.service.impl;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.springboot.conf.Result;
+import com.example.springboot.entity.User;
 import com.example.springboot.entity.UserInfo;
 import com.example.springboot.mapper.UserInfoMapper;
 import com.example.springboot.service.UserInfoService;
@@ -18,6 +23,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Service("UserInfoService")
@@ -40,7 +47,49 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
+    @Transactional
+    public Result deleteIds(String[] selection) {
+        List<String> ids = new ArrayList<>();
+        for(String userid:selection){
+            ids.add(userid);
+        }
+        if (selection.length == 0) {
+            return Result.error("-1","没有选中数据");
+        }else{
+            QueryWrapper<UserInfo> wrapper = new QueryWrapper<>();
+            wrapper.in("userid",ids);
+            userInfoMapper.delete(wrapper);
+        }
+        return Result.success();
+    }
+
+    @Override
+    @Transactional
+    public Result<UserInfo> deleteUser(String id) {
+        HashMap<String,Object> map = new HashMap<>();
+        map.put("userid",id);
+        userInfoMapper.deleteByMap(map);
+        return Result.success();
+    }
+
+    @Override
+    public Page<UserInfo> findPage(Integer pageNum, Integer pageSize, String search) {
+        LambdaQueryWrapper<UserInfo> wrapper = Wrappers.<UserInfo>lambdaQuery();
+        if (StringUtils.isNotBlank(search)) {
+            wrapper.like(UserInfo::getUserid, search);
+        }
+        return userInfoMapper.selectPage(new Page<UserInfo>(pageNum, pageSize), wrapper);
+    }
+
+    @Override
     public UserInfo selectAll(String userid) {
+        QueryWrapper wrapper = new QueryWrapper();
+        wrapper.eq("userid",userid);
+        return userInfoMapper.selectOne(wrapper);
+    }
+
+    @Override
+    public UserInfo selectUsername(String userid) {
         QueryWrapper wrapper = new QueryWrapper();
         wrapper.eq("userid",userid);
         return userInfoMapper.selectOne(wrapper);

@@ -1,22 +1,14 @@
 <template>
   <div class="self_block">
     <div class="imgDiv">
-      <!-- <el-image class="headImg" :src="user.header" @click="this.$router.push('/author')"> </el-image> -->
       <el-avatar class="headImg" :src="user.header" @click="this.$router.push('/author')"></el-avatar>
     </div>
     <div class="headName">Gleam</div>
     <nav style="text-align: center">
       <ul>
-        <li>文章</li>
-        <li>标签</li>
-        <li>分类</li>
-      </ul>
-    </nav>
-    <nav style="text-align: center">
-      <ul>
-        <li>123</li>
-        <li>2333</li>
-        <li>999</li>
+        <li><el-button type="text" style="color:black;font-size:105%" size="medium" @click="this.$router.push('/result')">文章<br><br>{{myNum.articleNum}}</el-button></li>
+        <li><el-button type="text" style="color:black;font-size:105%" size="medium" @click="this.$router.push('/result')">分类<br><br>{{myNum.categoryNum}}</el-button></li>
+        <li><el-button type="text" style="color:black;font-size:105%" size="medium" @click="this.$router.push('/result')">标签<br><br>{{myNum.tagNum}}</el-button></li>
       </ul>
     </nav>
     <div align="center">
@@ -56,14 +48,24 @@
 </template>
 
 <script>
+import request from "../utils/request";
+
 export default {
   name: "SelfBlock",
   data() {
     return {
       user: {
-        header: require("../assets/avatar/avatar.jpg"),
+        header: require("../assets/avatar/Rosetta.jpg"),
       },
+      myNum: {},
     };
+  },
+  created(){
+    request.get("http://" + window.server.ip + ":9090/article/selectMyNum").then(res =>{
+      this.myNum.categoryNum = res.categoryNum
+      this.myNum.tagNum = res.tagNum
+      this.myNum.articleNum = res.articleNum
+    })
   },
   methods: {
     githubClick() {
@@ -121,7 +123,7 @@ li {
   margin: 0 15px;
 }
 .button {
-  margin-top: 15px;
+  margin-top: 5px;
   width: 180px;
   text-align: center;
 }

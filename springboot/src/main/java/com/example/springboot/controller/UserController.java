@@ -1,6 +1,8 @@
 package com.example.springboot.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.springboot.conf.Result;
+import com.example.springboot.entity.Article;
 import com.example.springboot.entity.User;
 import com.example.springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,11 @@ public class UserController {
     @GetMapping("/checkToken")
     public Result checkToken(HttpServletRequest request){
         return userService.checkToken(request);
+    }
+
+    @GetMapping("/checkPerms")
+    public Result checkPerms(HttpServletRequest request){
+        return userService.checkPerms(request);
     }
 
     @GetMapping("/selectUserid")
@@ -50,5 +57,17 @@ public class UserController {
         return userService.deleteUser(userid);
     }
 
+    @GetMapping
+    public Result<?> findPage(@RequestParam(defaultValue = "1") Integer pageNum,
+                              @RequestParam(defaultValue = "10") Integer pageSize,
+                              @RequestParam(defaultValue = "") String search) {
+        Page<User> page = userService.findPage(pageNum, pageSize, search);
+        return Result.success(page);
+    }
+
+    @DeleteMapping("/deleteIds")
+    public Result deleteIds(@RequestParam(value = "selection") String[] selection){
+        return userService.deleteIds(selection);
+    }
 }
 

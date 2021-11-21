@@ -53,7 +53,7 @@
       </div>
     </div>
     <div style="width: 30%">
-      <div style="margin: 0 auto"><SelfBlock /><InfoBlock /><TagBlock /></div>
+      <div style="margin: 0 auto"><SelfBlock /><InfoBlock /><TagBlock /><TimeBlock /></div>
     </div>
   </div>
 </template>
@@ -64,6 +64,7 @@ import Header from "@/components/Header";
 import About from "@/components/About";
 import SelfBlock from "@/components/SelfBlock";
 import InfoBlock from "@/components/InfoBlock";
+import TimeBlock from "@/components/TimeBlock";
 import TagBlock from "@/components/TagBlock";
 import Background from "../components/Background.vue";
 
@@ -75,6 +76,7 @@ export default {
     SelfBlock,
     InfoBlock,
     TagBlock,
+    TimeBlock,
     Background,
   },
   data() {
@@ -87,6 +89,7 @@ export default {
     };
   },
   created() {
+    this.$store.commit("newStatus", 0);
     this.load();
   },
   methods: {

@@ -1,10 +1,14 @@
 package com.example.springboot.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.springboot.common.utils.JwtUtils;
 import com.example.springboot.conf.Result;
+import com.example.springboot.entity.Article;
 import com.example.springboot.entity.User;
 import com.example.springboot.entity.UserInfo;
 import com.example.springboot.mapper.UserInfoMapper;
@@ -17,8 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Random;
+import java.util.*;
 
 @Service("UserService")
 public class UserServiceImpl implements UserService {
@@ -38,6 +41,23 @@ public class UserServiceImpl implements UserService {
         UpdateWrapper<User> updateWrapper = new UpdateWrapper<User>();
         updateWrapper.eq("userid",user.getUserid());
         userMapper.update(user, updateWrapper);
+        return Result.success();
+    }
+
+    @Override
+    @Transactional
+    public Result deleteIds(String[] selection) {
+        List<String> ids = new ArrayList<>();
+        for(String userid:selection){
+            ids.add(userid);
+        }
+        if (selection.length == 0) {
+            return Result.error("-1","没有选中数据");
+        }else{
+            QueryWrapper<User> wrapper = new QueryWrapper<>();
+            wrapper.in("userid",ids);
+            userMapper.delete(wrapper);
+        }
         return Result.success();
     }
 
@@ -80,6 +100,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Page<User> findPage(Integer pageNum, Integer pageSize, String search) {
+        LambdaQueryWrapper<User> wrapper = Wrappers.<User>lambdaQuery();
+        if (StringUtils.isNotBlank(search)) {
+            wrapper.like(User::getUserid, search);
+        }
+        return userMapper.selectPage(new Page<User>(pageNum, pageSize), wrapper);
+    }
+
+    @Override
     @Transactional
     public Result<User> login(User user) {
         User res = userMapper.selectOne(Wrappers.<User>lambdaQuery().eq(User::getUserid, user.getUserid()).eq(User::getPassword, user.getPassword()));
@@ -102,6 +131,18 @@ public class UserServiceImpl implements UserService {
         Claims claims = jwtUtils.checkToken(token);
         if(claims == null){
             return Result.error("-1","token校验失败");
+        }
+        else
+            return Result.success();
+    }
+
+    @Override
+    public Result checkPerms(HttpServletRequest request) {
+        String token = request.getHeader("token");
+        Claims claims = jwtUtils.checkToken(token);
+        String perms = (String) claims.get("perms");
+        if(!perms.equals("manage")){
+            return Result.error("-1","您没有这么做的权限！");
         }
         else
             return Result.success();

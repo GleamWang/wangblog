@@ -8,18 +8,20 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.springboot.conf.Result;
 import com.example.springboot.entity.Article;
+import com.example.springboot.entity.MyNum;
 import com.example.springboot.mapper.ArticleMapper;
 import com.example.springboot.service.ArticleService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URLEncoder;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
@@ -46,10 +48,34 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Page<Article> findPage(Integer pageNum, Integer pageSize, String search) {
         LambdaQueryWrapper<Article> wrapper = Wrappers.<Article>lambdaQuery();
-        if(StringUtils.isNotBlank(search)){
+        if (StringUtils.isNotBlank(search)) {
             wrapper.like(Article::getTitle, search);
         }
         return articleMapper.selectPage(new Page<Article>(pageNum, pageSize), wrapper);
+    }
+
+    @Override
+    @Transactional
+    public Result deleteIds(String[] selection) {
+        List<String> ids = new ArrayList<>();
+        for(String id:selection){
+            ids.add(id);
+        }
+        if (selection.length == 0) {
+            return Result.error("-1","没有选中数据");
+        }else{
+            QueryWrapper<Article> wrapper = new QueryWrapper<>();
+            wrapper.in("id",ids);
+            articleMapper.delete(wrapper);
+        }
+        return Result.success();
+    }
+
+    @Override
+    @Transactional
+    public Result deleted(Long id) {
+        articleMapper.deleteById(id);
+        return Result.success();
     }
 
     @Override
@@ -62,16 +88,53 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Page<Article> findPageByTag(Integer pageNum, Integer pageSize, String tag) {
         LambdaQueryWrapper<Article> wrapper = Wrappers.<Article>lambdaQuery();
-        if(StringUtils.isNotBlank(tag)){
+        if (StringUtils.isNotBlank(tag)) {
             wrapper.like(Article::getTag, tag);
         }
         return articleMapper.selectPage(new Page<Article>(pageNum, pageSize), wrapper);
     }
 
     @Override
+    @Transactional
+    public Result update(Article article) {
+        article.setTime2(new Date());
+        articleMapper.updateById(article);
+        return Result.success();
+    }
+
+    @Override
+    public MyNum findMyArticleNum(String userid) {
+        QueryWrapper wrapper = new QueryWrapper();
+        wrapper.like("author", userid);
+        List<Article> list = articleMapper.selectList(wrapper);
+        Set categorySet = new HashSet();
+        Set tagSet = new HashSet();
+        for (Article article : list) {
+            categorySet.add(article.getCategory());
+            String[] res = article.getTag().split(",");
+            for (String item : res) {
+                tagSet.add(item);
+            }
+        }
+        //文章分类数量
+        Integer categoryNum = categorySet.size();
+        //用到的标签数量
+        Integer tagNum = tagSet.size();
+        //作者的文章总数量
+        Long articleNum = articleMapper.selectCount(wrapper);
+
+        MyNum number = new MyNum();
+        number.setCategoryNum(categoryNum);
+        number.setTagNum(tagNum);
+        number.setArticleNum(articleNum);
+
+        return number;
+    }
+
+    @Override
     public Page<Article> findPageByAuthor(Integer pageNum, Integer pageSize, String author) {
         LambdaQueryWrapper<Article> wrapper = Wrappers.<Article>lambdaQuery();
-        if(StringUtils.isNotBlank(author)){
+        if (StringUtils.isNotBlank(author)) {
             wrapper.like(Article::getAuthor, author);
         }
         return articleMapper.selectPage(new Page<Article>(pageNum, pageSize), wrapper);
@@ -80,7 +143,7 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Page<Article> findPageByCategory(Integer pageNum, Integer pageSize, String category) {
         LambdaQueryWrapper<Article> wrapper = Wrappers.<Article>lambdaQuery();
-        if(StringUtils.isNotBlank(category)){
+        if (StringUtils.isNotBlank(category)) {
             wrapper.like(Article::getCategory, category);
         }
         return articleMapper.selectPage(new Page<Article>(pageNum, pageSize), wrapper);

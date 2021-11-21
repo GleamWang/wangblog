@@ -5,10 +5,7 @@ import com.example.springboot.conf.Result;
 import com.example.springboot.entity.Animation;
 import com.example.springboot.service.AnimationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController()
 @RequestMapping("/animation")
@@ -25,4 +22,24 @@ public class AnimationController {
         return Result.success(page);
     }
 
+    @DeleteMapping("/{id}")
+    public Result update(@PathVariable Long id){
+        return animationService.deleted(id);
+    }
+
+    @PutMapping
+    public Result update(@RequestBody Animation animation){
+        return animationService.update(animation);
+    }
+
+    @PostMapping
+    public Result insert(@RequestBody Animation animation) {
+        animationService.insert(animation);
+        return Result.success();
+    }
+
+    @DeleteMapping("/deleteIds")
+    public Result deleteIds(@RequestParam(value = "selection") String[] selection){
+        return animationService.deleteIds(selection);
+    }
 }

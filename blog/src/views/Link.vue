@@ -9,26 +9,12 @@
   </div>
   <div style="display: flex; width: 70%; margin: 0 auto">
     <div style="width: 70%">
-      <div id="classify-block">
         <div class="single-block">
-          <div
-            align="center"
-            style="
-              font-size: 200%;
-              font-family: '楷体';
-              margin-bottom: 10px;
-            "
-          >
-            
-          </div>
-          <div class="block">
-
-          </div>
         </div>
-      </div>
+  
     </div>
     <div style="width: 30%">
-      <div style="margin: 0 auto"><SelfBlock /><WarnBlock /><InfoBlock /><TagBlock /></div>
+      <div style="margin: 0 auto"><SelfBlock /><WarnBlock /><InfoBlock /><TagBlock /><TimeBlock /></div>
     </div>
   </div>
 </template>
@@ -39,6 +25,7 @@ import About from "@/components/About";
 import SelfBlock from "@/components/SelfBlock";
 import InfoBlock from "@/components/InfoBlock";
 import WarnBlock from "@/components/WarnBlock";
+import TimeBlock from "@/components/TimeBlock";
 import TagBlock from "@/components/TagBlock";
 import Background from "../components/Background.vue";
 
@@ -50,6 +37,7 @@ export default {
     SelfBlock,
     InfoBlock,
     WarnBlock,
+    TimeBlock,
     TagBlock,
     Background,
   },
@@ -57,15 +45,16 @@ export default {
     return {
     };
   },
+  created(){
+    this.$store.commit("newStatus", 0);
+  }
 };
 </script>
 
 <style scoped>
-#classify-block {
-  margin: 0 auto;
-}
 .single-block {
   padding: 20px;
+  height: 300px;
   margin: 20px 0;
   box-shadow: border-box;
   background: rgba(255, 255, 255, 1);

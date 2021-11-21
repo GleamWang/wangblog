@@ -63,6 +63,9 @@ export default {
       ],
     };
   },
+  created(){
+    this.$store.commit("newStatus", 1);
+  },
   methods: {
     pushClassify(content) {
       this.$router.push({

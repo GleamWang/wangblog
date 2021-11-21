@@ -1,11 +1,14 @@
 package com.example.springboot.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.springboot.conf.Result;
 import com.example.springboot.entity.Article;
+import com.example.springboot.entity.MyNum;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 public interface ArticleService {
 
@@ -24,4 +27,12 @@ public interface ArticleService {
     Page<Article> findPageByAuthor(Integer pageNum, Integer pageSize, String author);
 
     Page<Article> findPageByCategory(Integer pageNum, Integer pageSize, String category);
+
+    MyNum findMyArticleNum(String userid);
+
+    Result update(Article article);
+
+    Result deleted(Long id);
+
+    Result deleteIds(String[] selection);
 }

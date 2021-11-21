@@ -12,7 +12,8 @@
         <el-form-item align="center">
           <el-input
             v-model="form.title"
-            style="width: 800px"
+            style="width: 70%"
+            size="medium"
             placeholder="请输入标题"
           ></el-input>
         </el-form-item>
@@ -21,7 +22,7 @@
             <div
               id="text-container"
               class="text"
-              style="width: 800px; margin: 0 auto; height: 500px"
+              style="width: 70%; margin: 0 auto; height: 700px"
             ></div>
           </div>
         </el-form-item>
@@ -76,66 +77,22 @@
 
               <hr style="margin-top: 10px; margin-bottom: 10px" />
               <el-tabs tab-position="left" style="height: 200px">
-                <el-tab-pane label="Java">
-                  <h4>添加标签</h4>
-                  <el-tag
-                    v-for="tag in tags1"
-                    :key="tag.name"
-                    :type="tag.type"
-                    @click="addTag(tag.name)"
-                    v-model="tag.name"
-                  >
-                    {{ tag.name }}
-                  </el-tag>
-                </el-tab-pane>
-                <el-tab-pane label="前端">
-                  <h4>添加标签</h4>
-                  <el-tag
-                    v-for="tag in tags2"
-                    :key="tag.name"
-                    :type="tag.type"
-                    @click="addTag(tag.name)"
-                    v-model="tag.name"
-                  >
-                    {{ tag.name }}
-                  </el-tag>
-                </el-tab-pane>
-                <el-tab-pane label="后端">
-                  <h4>添加标签</h4>
-                  <el-tag
-                    v-for="tag in tags3"
-                    :key="tag.name"
-                    :type="tag.type"
-                    @click="addTag(tag.name)"
-                    v-model="tag.name"
-                  >
-                    {{ tag.name }}
-                  </el-tag>
-                </el-tab-pane>
-                <el-tab-pane label="编程语言">
-                  <h4>添加标签</h4>
-                  <el-tag
-                    v-for="tag in tags4"
-                    :key="tag.name"
-                    :type="tag.type"
-                    @click="addTag(tag.name)"
-                    v-model="tag.name"
-                  >
-                    {{ tag.name }}
-                  </el-tag></el-tab-pane
+                <el-tab-pane
+                  v-for="tagItem in tagList"
+                  :key="tagItem.name"
+                  :label="tagItem.name"
                 >
-                 <el-tab-pane label="数据库">
                   <h4>添加标签</h4>
                   <el-tag
-                    v-for="tag in tags5"
+                    v-for="tag in tagItem.group"
                     :key="tag.name"
                     :type="tag.type"
                     @click="addTag(tag.name)"
                     v-model="tag.name"
                   >
                     {{ tag.name }}
-                  </el-tag></el-tab-pane
-                >
+                  </el-tag>
+                </el-tab-pane>
               </el-tabs>
 
               <div :style="`float:right;display:${state1}`">
@@ -199,8 +156,28 @@ export default {
     About,
     Background,
   },
+  data() {
+    return {
+      form: {},
+      resource: true,
+      dialogImageUrl: "",
+      fileList: [],
+      dynamicTags: [],
+      state1: "",
+      state2: "",
+      value: true,
+      filesUploadUrl: "http://" + window.server.ip + ":9090/article/upload",
+      tagList: {},
+    };
+  },
+  created() {
+    this.$store.commit("newStatus", 0);
+    this.form.original = false;
+  },
   mounted() {
-      this.init();
+    this.init();
+    this.initTags();
+    this.initUsername();
   },
   computed: {
     tagNum: {
@@ -217,82 +194,31 @@ export default {
       },
     },
   },
-  data() {
-    return {
-      form: {},
-      resource: true,
-      dialogImageUrl: "",
-      fileList: [],
-      dynamicTags: [],
-      state1: "",
-      state2: "",
-      value: true,
-      filesUploadUrl: "http://" + window.server.ip + ":9090/article/upload",
-      tags1: [
-        { name: "Jar", type: "" },
-        { name: "Tomcat", type: "success" },
-        { name: "Spring", type: "info" },
-        { name: "Springmvc", type: "warning" },
-        { name: "Springboot", type: "danger" },
-        { name: "IDEA", type: "" },
-        { name: "JVM", type: "info" },
-        { name: "Hibernate", type: "success" },
-        { name: "J2EE", type: "danger" },
-        { name: "SpringCloud", type: "warning" },
-      ],
-      tags2: [
-        { name: "JavaScript", type: "" },
-        { name: "Vue", type: "danger" },
-        { name: "Html", type: "success" },
-        { name: "React", type: "warning" },
-        { name: "CSS", type: "info" },
-        { name: "ElementPlus", type: "" },
-        { name: ".net", type: "info" },
-        { name: "Ajax", type: "success" },
-        { name: "Axios", type: "danger" },
-        { name: "Promise", type: "warning" },
-      ],
-      tags3: [
-        { name: "Netty", type: "" },
-        { name: "Tomcat", type: "success" },
-        { name: "Spring", type: "info" },
-        { name: "Springmvc", type: "warning" },
-        { name: "Springboot", type: "danger" },
-        { name: "IDEA", type: "" },
-        { name: "RabbitMQ", type: "info" },
-        { name: "Kafka", type: "success" },
-        { name: "Zookeeper", type: "danger" },
-        { name: "Shiro", type: "warning" },
-        { name: "Nginx", type: "info" },
-        { name: "Redis", type: "success" },
-      ],
-      tags4: [
-        { name: "Java", type: "" },
-        { name: "Python", type: "success" },
-        { name: "C++", type: "info" },
-        { name: "C#", type: "warning" },
-        { name: "JavaScript", type: "danger" },
-        { name: "C", type: "" },
-        { name: "Linux", type: "info" },
-        { name: ".net", type: "success" },
-        { name: "Golang", type: "danger" },
-        { name: "PHP", type: "warning" },
-      ],
-       tags5: [
-        { name: "MySQL", type: "" },
-        { name: "Oracle", type: "success" },
-        { name: "Sql Server", type: "info" },
-        { name: "Redis", type: "warning" },
-        { name: "MongoDb", type: "danger" },
-      ],
-    };
-  },
   methods: {
-    init(){
+    //初始化富文本编辑器
+    init() {
       editor = new E("#toolbar-container", "#text-container");
       editor.config.focus = false;
       editor.config.height = 500;
       editor.create();
+    },
+    //初始化tags的json文件
+    initTags() {
+      request.get("/static/tags.json").then((res) => {
+        this.tagList = res;
+      });
+    },
+    //通过userid获取username并赋值
+    initUsername() {
+      let userid = JSON.parse(window.localStorage.getItem("access-userid"));
+      request
+        .get("http://" + window.server.ip + ":9090/userinfo/selectUsername", {
+          params: { userid: userid },
+        })
+        .then((res) => {
+          //初始化文章的作者
+          this.form.author = res.username;
+        });
     },
     beforeAvatarUpload(file, fileList) {
       if (file.size / (1024 * 1024) > 5) {
@@ -301,18 +227,15 @@ export default {
         return false;
       }
     },
-
     handleChange(file, fileList) {
       //只显示最后一个上传的文件
       if (fileList.length > 0) {
         this.fileList = [fileList[fileList.length - 1]];
       }
     },
-
     handleClose(tag) {
       this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
     },
-
     addTag(tagName) {
       if (tagName) {
         if (this.dynamicTags.length < 5)
@@ -323,7 +246,32 @@ export default {
       }
     },
     submit() {
-      this.$refs.upload.submit();
+      if (this.resource == false) {
+        this.form.content1 = editor.txt.text();
+        this.form.content2 = editor.txt.html();
+        this.form.tag = this.dynamicTags.toString();
+        request
+          .post("http://" + window.server.ip + ":9090/article", this.form)
+          .then((res) => {
+            if (res.code === "0") {
+              this.$message({
+                type: "success",
+                message: "发布成功",
+              });
+              this.form = {};
+              editor.txt.clear();
+              this.dynamicTags = [];
+              this.fileList = [];
+            } else {
+              this.$message({
+                type: "error",
+                message: res.msg,
+              });
+            }
+          });
+      } else {
+        this.$refs.upload.submit();
+      }
     },
     filesUploadSuccess(res) {
       this.form.img = res.data;
@@ -331,23 +279,25 @@ export default {
       this.form.content2 = editor.txt.html();
       this.form.tag = this.dynamicTags.toString();
       this.form.author = "Gleam";
-      request.post("http://" + window.server.ip + ":9090/article", this.form).then((res) => {
-        if (res.code === "0") {
-          this.$message({
-            type: "success",
-            message: "新增成功",
-          });
-          this.form = {};
-          editor.txt.clear();
-          this.dynamicTags = [];
-          this.fileList = [];
-        } else {
-          this.$message({
-            type: "error",
-            message: res.msg,
-          });
-        }
-      });
+      request
+        .post("http://" + window.server.ip + ":9090/article", this.form)
+        .then((res) => {
+          if (res.code === "0") {
+            this.$message({
+              type: "success",
+              message: "新增成功",
+            });
+            this.form = {};
+            editor.txt.clear();
+            this.dynamicTags = [];
+            this.fileList = [];
+          } else {
+            this.$message({
+              type: "error",
+              message: res.msg,
+            });
+          }
+        });
     },
   },
 };
@@ -358,7 +308,7 @@ export default {
   background: rgb(232, 232, 232);
 }
 .creation_block {
-  max-width: 800px;
+  width: 70%;
   height: auto;
   box-shadow: border-box;
   background: rgba(255, 255, 255, 1);
@@ -389,18 +339,6 @@ export default {
 }
 .upload-demo {
   display: flex;
-}
-.upload-demo >>> .el-list-enter-active,
-.el-list-leave-active {
-  transition: none;
-}
-
-.upload-demo >>> .el-list-enter,
-.el-list-leave-active {
-  opacity: 0;
-}
-.upload-demo >>> .el-upload-list {
-  height: 40px;
 }
 .toolbar {
   z-index: 999;

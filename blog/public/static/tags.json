@@ -1,0 +1,215 @@
+{
+    "tags1": {
+        "name": "Java",
+        "group": [
+            {
+                "name": "Jar",
+                "type": ""
+            },
+            {
+                "name": "Tomcat",
+                "type": "success"
+            },
+            {
+                "name": "Spring",
+                "type": "info"
+            },
+            {
+                "name": "Springmvc",
+                "type": "warning"
+            },
+            {
+                "name": "Springboot",
+                "type": "danger"
+            },
+            {
+                "name": "IDEA",
+                "type": ""
+            },
+            {
+                "name": "JVM",
+                "type": "info"
+            },
+            {
+                "name": "Hibernate",
+                "type": "success"
+            },
+            {
+                "name": "J2EE",
+                "type": "danger"
+            },
+            {
+                "name": "SpringCloud",
+                "type": "warning"
+            }
+        ]
+    },
+    "tags2": {
+        "name": "前端",
+        "group": [
+            {
+                "name": "JavaScript",
+                "type": ""
+            },
+            {
+                "name": "Vue",
+                "type": "danger"
+            },
+            {
+                "name": "Html",
+                "type": "success"
+            },
+            {
+                "name": "React",
+                "type": "warning"
+            },
+            {
+                "name": "CSS",
+                "type": "info"
+            },
+            {
+                "name": "ElementPlus",
+                "type": ""
+            },
+            {
+                "name": ".net",
+                "type": "info"
+            },
+            {
+                "name": "Ajax",
+                "type": "success"
+            },
+            {
+                "name": "Axios",
+                "type": "danger"
+            },
+            {
+                "name": "Promise",
+                "type": "warning"
+            }
+        ]
+    },
+    "tags3": {
+        "name": "后端",
+        "group": [
+            {
+                "name": "Netty",
+                "type": ""
+            },
+            {
+                "name": "Tomcat",
+                "type": "success"
+            },
+            {
+                "name": "Spring",
+                "type": "info"
+            },
+            {
+                "name": "Springmvc",
+                "type": "warning"
+            },
+            {
+                "name": "Springboot",
+                "type": "danger"
+            },
+            {
+                "name": "IDEA",
+                "type": ""
+            },
+            {
+                "name": "RabbitMQ",
+                "type": "info"
+            },
+            {
+                "name": "Kafka",
+                "type": "success"
+            },
+            {
+                "name": "Zookeeper",
+                "type": "danger"
+            },
+            {
+                "name": "Shiro",
+                "type": "warning"
+            },
+            {
+                "name": "Nginx",
+                "type": "info"
+            },
+            {
+                "name": "Redis",
+                "type": "success"
+            }
+        ]
+    },
+    "tags4": {
+        "name": "编程语言",
+        "group": [
+            {
+                "name": "Java",
+                "type": ""
+            },
+            {
+                "name": "Python",
+                "type": "success"
+            },
+            {
+                "name": "C++",
+                "type": "info"
+            },
+            {
+                "name": "C#",
+                "type": "warning"
+            },
+            {
+                "name": "JavaScript",
+                "type": "danger"
+            },
+            {
+                "name": "C",
+                "type": ""
+            },
+            {
+                "name": "Linux",
+                "type": "info"
+            },
+            {
+                "name": ".net",
+                "type": "success"
+            },
+            {
+                "name": "Golang",
+                "type": "danger"
+            },
+            {
+                "name": "PHP",
+                "type": "warning"
+            }
+        ]
+    },
+    "tags5": {
+        "name": "数据库",
+        "group": [
+            {
+                "name": "MySQL",
+                "type": ""
+            },
+            {
+                "name": "Oracle",
+                "type": "success"
+            },
+            {
+                "name": "Sql Server",
+                "type": "info"
+            },
+            {
+                "name": "Redis",
+                "type": "warning"
+            },
+            {
+                "name": "MongoDb",
+                "type": "danger"
+            }
+        ]
+    }
+}

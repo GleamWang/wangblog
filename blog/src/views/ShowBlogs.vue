@@ -7,7 +7,9 @@
             <el-image style="height:100px" :src="item.img">
               <template #error>
                 <div class="image-slot">
-                  <i class="el-icon-picture-outline"></i>
+                  <i>
+                    <el-image :src="require('@/assets/avatar/Rosetta.jpg')"></el-image>
+                  </i>
                 </div>
               </template>
             </el-image>
@@ -61,7 +63,7 @@ export default {
       currentPage: 1,
       total: 0,
       tableData: [],
-      pageSize: 10,
+      pageSize: 5,
       search: '',
     };
   },

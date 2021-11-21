@@ -48,7 +48,7 @@
 
       <div class="single-block">
         <h2>#开发计划</h2>
-        <el-card class="box-card" style="margin-top: 20px">
+        <el-card class="box-card" style="margin-top: 20px" shadow="hover">
           <template #header>
             <div class="card-header">
               <span>实现功能</span>
@@ -69,17 +69,40 @@
           >
             完善用户信息数据库
           </div>
-          <div class="text item" style="margin-bottom: 10px; text-decoration: line-through">
+          <div
+            class="text item"
+            style="margin-bottom: 10px; text-decoration: line-through"
+          >
             实现个人中心菜单功能
           </div>
-          <div class="text item" style="margin-bottom: 10px; text-decoration: line-through">
+          <div
+            class="text item"
+            style="margin-bottom: 10px; text-decoration: line-through"
+          >
             实现独立的搜索页面
           </div>
-          <div class="text item" style="margin-bottom: 10px">
+          <div
+            class="text item"
+            style="margin-bottom: 10px; text-decoration: line-through"
+          >
+            查询类和标签数量
+          </div>
+          <div
+            class="text item"
+            style="margin-bottom: 10px; text-decoration: line-through"
+          >
             实现后台管理系统可视化
           </div>
-          <div class="text item" style="margin-bottom: 10px">加载页面</div>
-          <div class="text item" style="margin-bottom: 10px">
+          <div
+            class="text item"
+            style="margin-bottom: 10px; text-decoration: line-through"
+          >
+            加载页面
+          </div>
+          <div
+            class="text item"
+            style="margin-bottom: 10px; text-decoration: line-through"
+          >
             博客在线修改功能
           </div>
           <div class="text item" style="margin-bottom: 10px">
@@ -91,7 +114,7 @@
             实现访问量等数据的可视化
           </div>
         </el-card>
-        <el-card class="box-card" style="margin-top: 20px">
+        <el-card class="box-card" style="margin-top: 20px" shadow="hover">
           <template #header>
             <div class="card-header">
               <span>Bug修复</span>
@@ -124,12 +147,23 @@
           >
             右侧信息块float:left不生效
           </div>
+          <div
+            class="text item"
+            style="margin-bottom: 10px; text-decoration: line-through"
+          >
+            不选择封面无法上传博客(原因已定位)
+          </div>
+          <div class="text item" style="margin-bottom: 10px">
+            修改文章时original绑定的数据无法同步
+          </div>
         </el-card>
       </div>
     </div>
 
     <div style="width: 30%">
-      <div style="margin: 0 auto"><SelfBlock /><InfoBlock /><TagBlock /></div>
+      <div style="margin: 0 auto">
+        <SelfBlock /><InfoBlock /><TagBlock /><TimeBlock />
+      </div>
     </div>
   </div>
 </template>
@@ -141,6 +175,7 @@ import About from "@/components/About";
 import TagBlock from "@/components/TagBlock";
 import SelfBlock from "@/components/SelfBlock";
 import InfoBlock from "@/components/InfoBlock";
+import TimeBlock from "@/components/TimeBlock";
 import Background from "../components/Background.vue";
 
 export default {
@@ -152,7 +187,11 @@ export default {
     TagBlock,
     SelfBlock,
     InfoBlock,
+    TimeBlock,
     Background,
+  },
+  created() {
+    this.$store.commit("newStatus", 0);
   },
 };
 </script>

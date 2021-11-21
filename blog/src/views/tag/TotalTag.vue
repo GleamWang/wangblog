@@ -71,6 +71,9 @@ export default {
       ],
     };
   },
+  created(){
+    this.$store.commit("newStatus", 1);
+  },
   methods: {
     pushTag(name) {
       this.$router.push({

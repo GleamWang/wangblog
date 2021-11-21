@@ -4,7 +4,9 @@ import Classify from '../layout/Classify.vue'
 import Space from '../layout/Space.vue'
 import Tag from '../layout/Tag.vue'
 import Error from '../layout/Error.vue'
+import Manage from '../layout/Manage.vue'
 import axios from 'axios'
+import { ElMessage } from 'element-plus'
 
 const routes = [
   {
@@ -96,7 +98,6 @@ const routes = [
       },
     ]
   },
-
   {
     path: '/error',
     name: 'Error',
@@ -120,6 +121,38 @@ const routes = [
     ]
   },
   {
+    path: '/manage',
+    name: 'Manage',
+    redirect: '/manage/ofArticle',
+    meta: {
+      requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
+      requirePerms: true,  // 添加该字段，表示进入这个路由是需要权限的
+    },
+    component: Manage,
+    children: [
+      {
+        path: 'ofArticle',
+        name: 'OfArticle',
+        component: () => import("@/views/manage/OfArticle")
+      },
+      {
+        path: 'ofUser',
+        name: 'OfUser',
+        component: () => import("@/views/manage/OfUser")
+      },
+      {
+        path: 'ofUserInfo',
+        name: 'OfUserInfo',
+        component: () => import("@/views/manage/OfUserInfo")
+      },
+      {
+        path: 'ofAnimation',
+        name: 'OfAnimation',
+        component: () => import("@/views/manage/OfAnimation")
+      },
+    ]
+  },
+  {
     path: '/creation',
     name: 'Creation',
     meta: {
@@ -139,6 +172,12 @@ const routes = [
     props: true
   },
   {
+    path: '/modify/:id',
+    name: 'Modify',
+    component: () => import("@/views/Modify"),
+    props: true
+  },
+  {
     path: '/result',
     name: 'Result',
     component: () => import("@/views/Result"),
@@ -149,6 +188,7 @@ const routes = [
     name: 'Animation',
     meta: {
       requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
+      requirePerms: true,  // 添加该字段，表示进入这个路由是需要权限的
     },
     component: () => import("@/views/Animation"),
     props: true
@@ -190,7 +230,8 @@ router.beforeEach((to, from, next) => {
   else if (to.meta.requireAuth) {// 判断该路由是否需要登录权限
     let token = JSON.parse(window.localStorage.getItem("access-token"))
     if (!token) {
-      next({ path: '/login' })
+      ElMessage.error("此功能需要登录后才能使用！")
+      // next({ path: '/login' })
     }
     else {
       //校验token合法性
@@ -202,9 +243,31 @@ router.beforeEach((to, from, next) => {
         }
       }).then(res => {
         if (res.data.code === "-1") {  //校验失败
+          ElMessage.error(res.data.msg)
           next({ path: '/login' }) //最好跳转到错误页面
         }
-        next()
+        else{
+          if(to.meta.requirePerms){
+            //校验perms权限
+            axios({
+              url: "http://" + window.server.ip + ":9090/user/checkPerms",
+              method: 'get',
+              headers: {
+                token: token
+              }
+            }).then(res => {
+              if (res.data.code === "-1") {  //没有manage权限
+                ElMessage.error(res.data.msg)
+                next({ path: '/' }) //最好跳转到错误页面
+              }
+              else
+                next()
+            })
+          }
+          else{
+            next()
+          }
+        }
       })
     }
   }

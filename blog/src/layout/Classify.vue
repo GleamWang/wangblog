@@ -12,7 +12,7 @@
       <router-view />
     </div>
     <div style="width: 30%">
-      <div style="margin: 0 auto"><SelfBlock /><WarnBlock /><InfoBlock /><TagBlock /></div>
+      <div style="margin: 0 auto"><SelfBlock /><WarnBlock /><InfoBlock /><TagBlock /><TimeBlock /></div>
     </div>
   </div>
 </template>
@@ -23,6 +23,7 @@ import About from "@/components/About";
 import SelfBlock from "@/components/SelfBlock";
 import InfoBlock from "@/components/InfoBlock";
 import WarnBlock from "@/components/WarnBlock";
+import TimeBlock from "@/components/TimeBlock";
 import TagBlock from "@/components/TagBlock";
 import Background from "../components/Background.vue";
 
@@ -34,6 +35,7 @@ export default {
     SelfBlock,
     InfoBlock,
     WarnBlock,
+    TimeBlock,
     TagBlock,
     Background,
   },

@@ -11,15 +11,48 @@
     <div style="width: 30%" align="center">
       <el-affix :offset="44">
         <div class="left-block">
-        <el-button type="text" size="medium" style="font-size:105%;color:black;margin-top:10px" @click="this.$router.push('/space/profile')">个人资料</el-button>
-        <br>
-        <el-button type="text" size="medium" style="font-size:105%;color:black" @click="this.$router.push('/space/account')">账号设置</el-button>
-        <br>
-        <el-button type="text" size="medium" style="font-size:105%;color:black" @click="this.$router.push('/space/privacy')" disabled>隐私设置</el-button>
-        <br>
-        <el-button type="text" size="medium" style="font-size:105%;color:black" @click="this.$router.push('/space/collection')" disabled>我的收藏</el-button>
-        <br>
-        <el-button type="text" size="medium" style="font-size:105%;color:black;margin-bottom:10px" @click="this.$router.push('/space/content')" disabled>内容管理</el-button>
+          <el-button
+            type="text"
+            size="medium"
+            style="font-size: 105%; color: black; margin-top: 10px"
+            @click="this.$router.push('/space/profile')"
+            >个人资料</el-button
+          >
+          <br />
+          <el-button
+            type="text"
+            size="medium"
+            style="font-size: 105%; color: black"
+            @click="this.$router.push('/space/account')"
+            >账号设置</el-button
+          >
+          <br />
+          <el-button
+            type="text"
+            size="medium"
+            style="font-size: 105%; color: black"
+            @click="this.$router.push('/space/content')"
+            >内容管理</el-button
+          >
+          <br />
+
+          <el-button
+            type="text"
+            size="medium"
+            style="font-size: 105%; color: black"
+            @click="this.$router.push('/space/privacy')"
+            disabled
+            >隐私设置</el-button
+          >
+          <br />
+          <el-button
+            type="text"
+            size="medium"
+            style="font-size: 105%; color: black; margin-bottom: 10px"
+            @click="this.$router.push('/space/collection')"
+            disabled
+            >我的收藏</el-button
+          >
         </div>
       </el-affix>
     </div>

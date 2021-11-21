@@ -212,6 +212,7 @@ export default {
     };
   },
   created() {
+    this.$store.commit("newStatus", 0);
     this.user.token = JSON.parse(window.localStorage.getItem("access-token"));
     this.user.userid = JSON.parse(window.localStorage.getItem("access-userid"));
     if (this.user.token === null || this.user.userid === null) {

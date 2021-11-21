@@ -17,6 +17,7 @@
         placeholder="请输入内容"
         v-model="input"
         size="medium"
+        @keypress.enter="enterSearch"
         clearable
       >
       </el-input>
@@ -54,7 +55,7 @@
                     <el-image style="height: 100px" :src="item.img">
                       <template #error>
                         <div class="image-slot">
-                          <i :class="el-icon-picture-outline"></i>
+                          <i :class="el - icon - picture - outline"></i>
                         </div>
                       </template>
                     </el-image>
@@ -132,6 +133,7 @@ export default {
   },
   created() {
     this.$store.commit("newStatus", 0);
+    this.enterSearch();
     this.input = this.search;
     this.load();
   },
@@ -144,8 +146,17 @@ export default {
     search: "load",
   },
   methods: {
+    //回车搜索
+    enterSearch() {
+      document.onkeydown = (e) => {
+        let _key = window.event.keyCode;
+        if (_key === 13) {
+          this.load();
+        }
+      };
+    },
     handleClick(tab, event) {
-    //   console.log(tab.props.name); 标签页的name属性
+      //   console.log(tab.props.name); 标签页的name属性
       switch (tab.props.name) {
         case "first":
           request
@@ -224,8 +235,8 @@ export default {
         })
         .then((res) => {
           this.tableData = res.data.records;
-        //   console.log(this.tableData);
-        //   console.log(this.tableData.length);
+          //   console.log(this.tableData);
+          //   console.log(this.tableData.length);
           this.total = res.data.total;
         });
     },

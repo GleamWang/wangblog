@@ -21,11 +21,12 @@
         {{ this.title }}
       </div>
       <div style="flex: 1"></div>
-      <div style="margin-top: 6.5px; margin-right: 20px" v-show="inputStatus">
+      <div style="margin-top: 6.5px; margin-right: 20px" v-if="inputStatus">
         <el-input
           placeholder="请输入内容"
           v-model="input"
           class="input-with-select"
+          @keypress.enter="enterSearch"
         >
           <template #append>
             <el-button icon="el-icon-search" @click="setSearch"></el-button>
@@ -136,7 +137,18 @@
               class="el-icon-setting"
               size="medium"
               style="color: black"
-              @click="this.$router.push('/login')"
+              @click="this.$router.push('/manage')"
+            >
+              后台管理</el-button
+            >
+          </div>
+          <div>
+            <el-button
+              type="text"
+              class="el-icon-circle-close"
+              size="medium"
+              style="color: black"
+              @click="exit"
             >
               安全退出</el-button
             >
@@ -255,6 +267,7 @@ export default {
     };
   },
   created() {
+    // this.enterSearch();
     this.user.token = JSON.parse(window.localStorage.getItem("access-token"));
     this.user.userid = JSON.parse(window.localStorage.getItem("access-userid"));
     if (this.user.token === null || this.user.userid === null) {
@@ -273,25 +286,28 @@ export default {
     }
   },
   mounted() {
-    // window.addEventListener("mousewheel", this.handleWheel);
-    // window.addEventListener("scroll", this.handleScroll, true);
   },
-    computed: {
+  computed: {
     inputStatus() {
-      return this.$store.state.inputStatus
-    }
+      return this.$store.state.inputStatus;
+    },
   },
   methods: {
     uploadSuccess() {},
-    // handleWheel(e) {
-    //   let direction = e.deltaY > 0 ? "down" : "up"; //deltaY为正则滚轮向下，为负滚轮向上
-    //   if (direction == "down" && e.deltaY >= 125) {
-    //     this.status = false;
-    //   }
-    //   if (direction == "up" && e.deltaY <= -125) {
-    //     this.status = true;
-    //   }
-    // },
+    exit(){
+    window.localStorage.removeItem('access-token')
+    window.localStorage.removeItem('access-userid')
+    window.location.reload()
+    },
+    //回车搜索
+    enterSearch() {
+      document.onkeydown = (e) => {
+        let _key = window.event.keyCode;
+        if (_key === 13) {
+          this.setSearch();
+        }
+      };
+    },
     change() {
       this.show = false;
     },
@@ -303,16 +319,6 @@ export default {
       this.input = "";
       this.$router.push("/result");
     },
-    // handleScroll(e) {
-    //   // 滚动条距顶部距离
-    //   let top = document.documentElement.scrollTop || document.body.scrollTop;
-    //   if (top = this.init) {
-    //     this.status = false;
-    //   } else {
-    //     this.status = true;
-    //   }
-    //   this.status = top;
-    // },
   },
 };
 </script>

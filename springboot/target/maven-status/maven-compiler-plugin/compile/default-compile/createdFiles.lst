@@ -4,6 +4,7 @@ com\example\springboot\service\impl\AnimationServiceImpl.class
 com\example\springboot\controller\UserInfoController.class
 com\example\springboot\conf\Result.class
 com\example\springboot\service\impl\ArticleServiceImpl.class
+com\example\springboot\entity\MyNum.class
 com\example\springboot\service\impl\UserServiceImpl.class
 com\example\springboot\common\config\CorsConfig.class
 com\example\springboot\mapper\UserMapper.class

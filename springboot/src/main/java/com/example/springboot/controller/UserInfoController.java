@@ -1,6 +1,8 @@
 package com.example.springboot.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.springboot.conf.Result;
+import com.example.springboot.entity.User;
 import com.example.springboot.entity.UserInfo;
 import com.example.springboot.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +38,28 @@ public class UserInfoController {
     @PutMapping
     public Result update(@RequestBody UserInfo userinfo){
         return userInfoService.update(userinfo);
+    }
+
+    @GetMapping("/selectUsername")
+    public UserInfo selectUsername(@RequestParam("userid") String userid){
+        return userInfoService.selectUsername(userid);
+    }
+
+    @DeleteMapping("/{userid}")
+    public Result<?> update(@PathVariable String userid){
+        return userInfoService.deleteUser(userid);
+    }
+
+    @GetMapping("/page")
+    public Result<?> findPage(@RequestParam(defaultValue = "1") Integer pageNum,
+                              @RequestParam(defaultValue = "10") Integer pageSize,
+                              @RequestParam(defaultValue = "") String search) {
+        Page<UserInfo> page = userInfoService.findPage(pageNum, pageSize, search);
+        return Result.success(page);
+    }
+
+    @DeleteMapping("/deleteIds")
+    public Result deleteIds(@RequestParam(value = "selection") String[] selection){
+        return userInfoService.deleteIds(selection);
     }
 }

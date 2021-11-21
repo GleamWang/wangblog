@@ -64,6 +64,7 @@ export default {
     };
   },
   created() {
+    this.$store.commit("newStatus", 1);
     this.load();
   },
   methods: {

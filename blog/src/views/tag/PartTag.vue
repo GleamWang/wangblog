@@ -22,7 +22,7 @@
             color='#0bbd87'
             :hollow='true'
           >
-            <el-card @click="pushArticle(tagItem.id)">
+            <el-card @click="pushArticle(tagItem.id)" >
               <h3>{{ tagItem.title }}</h3>
               <span class="el-icon-price-tag" style="margin-top: 5px">{{
                 tagItem.tag
@@ -64,6 +64,7 @@ export default {
     };
   },
   created() {
+    this.$store.commit("newStatus", 1);
     this.load();
   },
   methods: {

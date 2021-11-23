@@ -17,10 +17,13 @@
         <span align=center
           >Welcome to the login interface_(:зゝ∠)_</span
         >
+        <div align=center>
+        <el-link icon="el-icon-bottom-right" type="primary" @click="this.$router.push('/')">直接前往博客主页</el-link>
+        </div>
       </div>
       <div class="box-right">
         <div>
-          <div style="text-align: center; font-size: 200%; margin-top: 40px">
+          <div style="text-align: center; font-size: 200%; margin-top:50px">
             欢迎登录
           </div>
           <el-form

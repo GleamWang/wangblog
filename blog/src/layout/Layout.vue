@@ -5,7 +5,7 @@
       pic="2.jpg"
     />
     <!-- <Topvideo /> -->
-    <Header position="fixed" title="lw的学习笔记"/>
+    <Header position="fixed" title="wangblog"/>
   </div>
   <About name="首 页"/>
   <div style="display: flex;width:70%;margin:0 auto">

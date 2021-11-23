@@ -10,14 +10,16 @@
       justify-content: center;
       align-items: center;
       opacity: 0.9;
+      
     "
   >
-    <div style="width: 400px; height: 420px; background-color: #474a59">
+    <div style="width: 400px; height: 350px; background-color: #474a59; border-radius: 10px;">
+      <div><el-button type="text" class="el-icon-d-arrow-left" size="medium" @click="this.$router.push('/login')">返回</el-button></div>
       <div
         style="
           text-align: center;
           font-size: 200%;
-          margin-top: 40px;
+          margin-top: 15px;
           color: white;
         "
       >
@@ -99,7 +101,7 @@ import Background from "../components/Background.vue";
 export default {
   name: "Register",
   components: {
-      Background,
+    Background,
   },
   data() {
     const checkUserid = (rule, value, callback) => {
@@ -151,14 +153,11 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           request
-            .get(
-              "http://" + window.server.ip + ":9090/user/selectUserid",
-              {
-                params: {
-                  userid: this.ruleForm.userid,
-                },
-              }
-            )
+            .get("http://" + window.server.ip + ":9090/user/selectUserid", {
+              params: {
+                userid: this.ruleForm.userid,
+              },
+            })
             .then((res) => {
               if (res == null || res == "" || res == undefined) {
                 request

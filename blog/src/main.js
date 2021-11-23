@@ -10,4 +10,11 @@ import '@/assets/css/global.css'
 
 createApp(App).use(store).use(router).use(ElementPlus, { locale, size: 'small' }).mount('#app')
 
+router.beforeEach((to,from,next)=>{
+    if(to.meta.title){
+        document.title = to.meta.title
+    }
+    next()
+})
+
 

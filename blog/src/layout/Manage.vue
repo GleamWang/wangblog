@@ -35,7 +35,7 @@
             <el-menu-item index="1-4" class="el-icon-headset" @click="this.$router.push('/manage/ofAnimation')"> Animation表</el-menu-item>
           </el-menu-item-group>
         </el-sub-menu>
-        <el-menu-item index="2">
+        <el-menu-item index="2"  @click="this.$router.push('/space/content')">
           <i class="el-icon-edit-outline"></i>
           <template #title>文章编辑</template>
         </el-menu-item>

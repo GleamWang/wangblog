@@ -18,9 +18,9 @@ const routes = [
       {
         path: 'blogs',
         name: 'ShowBlogs',
-        // meta: {
-        //   requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
-        // },
+        meta: {
+          title: 'wangblog-首页',
+        },
         component: () => import("@/views/ShowBlogs")
       },
     ]
@@ -34,11 +34,17 @@ const routes = [
       {
         path: 'totalClassify',
         name: 'TotalClassify',
+        meta: {
+          title: 'wangblog-分类',
+        },
         component: () => import("@/views/classify/TotalClassify")
       },
       {
         path: 'partClassify/:category',
         name: 'PartClassify',
+        meta: {
+          title: 'wangblog-详细分类',
+        },
         component: () => import("@/views/classify/PartClassify"),
         props: true
       },
@@ -53,11 +59,17 @@ const routes = [
       {
         path: 'totalTag',
         name: 'TotalTag',
+        meta: {
+          title: 'wangblog-标签',
+        },
         component: () => import("@/views/tag/TotalTag")
       },
       {
         path: 'partTag/:tag',
         name: 'PartTag',
+        meta: {
+          title: 'wangblog-详细标签',
+        },
         component: () => import("@/views/tag/PartTag"),
         props: true
       },
@@ -74,26 +86,41 @@ const routes = [
       {
         path: 'profile',
         name: 'Profile',
+        meta: {
+          title: 'wangblog-个人资料',
+        },
         component: () => import("@/views/space/Profile")
       },
       {
         path: 'privacy',
         name: 'Privacy',
+        meta: {
+          title: 'wangblog-隐私设置',
+        },
         component: () => import("@/views/space/Privacy")
       },
       {
         path: 'account',
         name: 'Account',
+        meta: {
+          title: 'wangblog-账号设置',
+        },
         component: () => import("@/views/space/Account")
       },
       {
         path: 'collection',
         name: 'Collection',
+        meta: {
+          title: 'wangblog-我的收藏',
+        },
         component: () => import("@/views/space/Collection")
       },
       {
         path: 'content',
         name: 'Content',
+        meta: {
+          title: 'wangblog-内容管理',
+        },
         component: () => import("@/views/space/Content")
       },
     ]
@@ -106,16 +133,25 @@ const routes = [
       {
         path: '404',
         name: '404',
+        meta: {
+          title: '404',
+        },
         component: () => import("@/views/error/404")
       },
       {
         path: '500',
         name: '500',
+        meta: {
+          title: '500',
+        },
         component: () => import("@/views/error/404")
       },
       {
         path: 'null',
         name: 'Null',
+        meta: {
+          title: 'null',
+        },
         component: () => import("@/views/error/null")
       },
     ]
@@ -133,21 +169,33 @@ const routes = [
       {
         path: 'ofArticle',
         name: 'OfArticle',
+        meta: {
+          title: 'wangblog-文章管理',
+        },
         component: () => import("@/views/manage/OfArticle")
       },
       {
         path: 'ofUser',
         name: 'OfUser',
+        meta: {
+          title: 'wangblog-用户管理',
+        },
         component: () => import("@/views/manage/OfUser")
       },
       {
         path: 'ofUserInfo',
         name: 'OfUserInfo',
+        meta: {
+          title: 'wangblog-用户信息管理',
+        },
         component: () => import("@/views/manage/OfUserInfo")
       },
       {
         path: 'ofAnimation',
         name: 'OfAnimation',
+        meta: {
+          title: 'wangblog-追番管理',
+        },
         component: () => import("@/views/manage/OfAnimation")
       },
     ]
@@ -157,29 +205,43 @@ const routes = [
     name: 'Creation',
     meta: {
       requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
+      requirePerms: true,  // 添加该字段，表示进入这个路由是需要权限的
+      title: 'wangblog-写博客',
     },
     component: () => import("@/views/Creation")
   },
   {
     path: '/author',
     name: 'Gleam',
+    meta: {
+      title: 'wangblog-关于作者',
+    },
     component: () => import("@/views/Gleam")
   },
   {
     path: '/article/:id',
     name: 'Article',
+    meta: {
+      title: 'wangblog-博客',
+    },
     component: () => import("@/views/Article"),
     props: true
   },
   {
     path: '/modify/:id',
     name: 'Modify',
+    meta: {
+      title: 'wangblog-修改博客',
+    },
     component: () => import("@/views/Modify"),
     props: true
   },
   {
     path: '/result',
     name: 'Result',
+    meta: {
+      title: 'wangblog-搜索',
+    },
     component: () => import("@/views/Result"),
     props: true
   },
@@ -189,6 +251,7 @@ const routes = [
     meta: {
       requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
       requirePerms: true,  // 添加该字段，表示进入这个路由是需要权限的
+      title: 'wangblog-追番',
     },
     component: () => import("@/views/Animation"),
     props: true
@@ -196,17 +259,26 @@ const routes = [
   {
     path: '/link',
     name: 'Link',
+    meta: {
+      title: 'wangblog-友链',
+    },
     component: () => import("@/views/Link"),
     props: true
   },
   {
     path: '/login',
     name: 'Login',
+    meta: {
+      title: 'wangblog-登录',
+    },
     component: () => import("@/views/Login")
   },
   {
     path: '/register',
     name: 'Register',
+    meta: {
+      title: 'wangblog-注册',
+    },
     component: () => import("@/views/Register")
   },
   {

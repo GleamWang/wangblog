@@ -1,23 +1,16 @@
 <template>
   <div class="info_block">
     <div>
-      <span class="el-icon-loading" style="color: orange"></span>
-      <span style="color: orange; font-size: 130%; font-weight: bold"
-        >重要通知</span
+      <span class="el-icon-loading" style="color: mediumseagreen"></span>
+      <span style="color: mediumseagreen; font-size: 130%; font-weight: bold"
+        >友情提示</span
       >
-      <span class="el-icon-loading" style="color: orange"></span>
+      <span class="el-icon-loading" style="color: mediumseagreen"></span>
       <article style="margin-top: 10px">
-        由于项目还未完成，以及可能存在一些bug，部分功能会被禁用，请谅解。 _(:з」∠)_
-        <br />
-        具体开发进度以及更新时间可前往顶部菜单<span
-          class="el-icon-info"
-          style="font-weight: bold"
-          >关于作者</span
-        >模块查看。
+        wangblog为个人博客，其中登录注册功能不受限制。如果想要发布博客或添加友链，可以联系作者申请权限
         <el-divider></el-divider>
-        以下为测试登录账号
-        <br />
-        un:test&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pw:123
+        如果浏览时发现bug，欢迎在Github上提交issue给我，如果拿了源码的话，
+        恳请点一下右上角的star即可。
       </article>
     </div>
   </div>

@@ -53,17 +53,21 @@ export default {
           size: "large",
         },
         {
-          content: "JVM",
+          content: "Linux",
           type: "primary",
           hollow: true,
         },
         {
           content: "SpringCloud",
         },
+        {
+          content: "Redis",
+          color: "#0bbd87",
+        },
       ],
     };
   },
-  created(){
+  created() {
     this.$store.commit("newStatus", 1);
   },
   methods: {

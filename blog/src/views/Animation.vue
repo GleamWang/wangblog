@@ -56,12 +56,14 @@
       <div style="margin: 0 auto"><SelfBlock /><InfoBlock /><TagBlock /><TimeBlock /></div>
     </div>
   </div>
+  <Footer />
 </template>
 
 <script>
 import request from "../utils/request";
 import Header from "@/components/Header";
 import About from "@/components/About";
+import Footer from "@/components/Footer";
 import SelfBlock from "@/components/SelfBlock";
 import InfoBlock from "@/components/InfoBlock";
 import TimeBlock from "@/components/TimeBlock";
@@ -73,6 +75,7 @@ export default {
   components: {
     Header,
     About,
+    Footer,
     SelfBlock,
     InfoBlock,
     TagBlock,

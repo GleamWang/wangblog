@@ -17,30 +17,30 @@
               <template #title>
                 昵称&nbsp;&nbsp;<i class="el-icon-edit-outline"></i>
               </template>
-              <img src="../assets/icon/aojiao.png" alt="" style="width: 15px" />
+              <img src="../assets/icon/aojiao.png" alt="" style="width: 10px" />
               &nbsp;&nbsp;Gleam
             </el-collapse-item>
             <el-collapse-item name="2">
               <template #title>
                 性别&nbsp;&nbsp;<i class="el-icon-female"></i>
               </template>
-              <div class="el-icon-male">男</div>
+              <div class="el-icon-male">&nbsp;男</div>
             </el-collapse-item>
             <el-collapse-item name="3">
               <template #title>
                 爱好&nbsp;&nbsp;<i class="el-icon-cpu"></i>
               </template>
-              <div class="el-icon-cpu">电脑硬件</div>
+              <div class="el-icon-cpu">&nbsp;电脑硬件</div>
               <br />
-              <div class="el-icon-monitor">主机游戏</div>
+              <div class="el-icon-monitor">&nbsp;主机游戏</div>
               <br />
-              <div class="el-icon-copy-document">编程</div>
+              <div class="el-icon-copy-document">&nbsp;编程</div>
             </el-collapse-item>
             <el-collapse-item name="4">
               <template #title>
                 专业&nbsp;&nbsp;<i class="el-icon-guide"></i>
               </template>
-              <div class="el-icon-connection">软件工程</div>
+              <div class="el-icon-connection">&nbsp;软件工程</div>
             </el-collapse-item>
           </el-collapse>
         </div>
@@ -156,6 +156,12 @@
           <div class="text item" style="margin-bottom: 10px">
             修改文章时original绑定的数据无法同步
           </div>
+          <div class="text item" style="margin-bottom: 10px; text-decoration: line-through">
+            内容管理显示数据非本人
+          </div>
+          <div class="text item" style="margin-bottom: 10px; text-decoration: line-through">
+            后台管理中修改权限功能失效
+          </div>
         </el-card>
       </div>
     </div>
@@ -166,12 +172,14 @@
       </div>
     </div>
   </div>
+  <Footer />
 </template>
 
 <script>
 import Topvideo from "@/components/Topvideo";
 import Header from "@/components/Header";
 import About from "@/components/About";
+import Footer from "@/components/Footer";
 import TagBlock from "@/components/TagBlock";
 import SelfBlock from "@/components/SelfBlock";
 import InfoBlock from "@/components/InfoBlock";
@@ -184,6 +192,7 @@ export default {
     Topvideo,
     Header,
     About,
+    Footer,
     TagBlock,
     SelfBlock,
     InfoBlock,

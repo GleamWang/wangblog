@@ -9,8 +9,7 @@
       <article style="margin-top: 10px">
         wangblog为个人博客，其中登录注册功能不受限制。如果想要发布博客或添加友链，可以联系作者申请权限
         <el-divider></el-divider>
-        如果浏览时发现bug，欢迎在Github上提交issue给我，如果拿了源码的话，
-        恳请点一下右上角的star即可。
+        如果浏览时发现bug，欢迎在Github上提交issue给我。
       </article>
     </div>
   </div>

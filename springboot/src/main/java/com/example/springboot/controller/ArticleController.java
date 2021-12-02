@@ -1,6 +1,5 @@
 package com.example.springboot.controller;
 
-import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.springboot.conf.Result;
 import com.example.springboot.entity.Article;
@@ -12,8 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
-
 
 @RestController()
 @RequestMapping("/article")

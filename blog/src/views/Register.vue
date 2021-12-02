@@ -92,16 +92,19 @@
       </el-form>
     </div>
   </div>
+  <Footer />
 </template>
 
 <script>
 import request from "../utils/request";
+import Footer from "@/components/Footer";
 import Background from "../components/Background.vue";
 
 export default {
   name: "Register",
   components: {
     Background,
+    Footer,
   },
   data() {
     const checkUserid = (rule, value, callback) => {

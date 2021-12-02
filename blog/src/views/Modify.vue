@@ -136,14 +136,14 @@
         </div>
       </el-form>
     </div>
-
-    <div class="footer" style="height: 500px"></div>
   </div>
+  <Footer />
 </template>
 
 <script>
 import Header from "@/components/Header";
 import About from "@/components/About";
+import Footer from "@/components/Footer";
 import Background from "../components/Background.vue";
 import E from "wangeditor";
 import request from "../utils/request";
@@ -157,6 +157,7 @@ export default {
     Header,
     About,
     Background,
+    Footer,
   },
   data() {
     return {
@@ -179,7 +180,7 @@ export default {
   mounted() {
     this.init();
     this.initTags();
-    this.initUsername();
+    this.form.author = JSON.parse(window.localStorage.getItem("access-username"));
   },
   computed: {
     tagNum: {
@@ -216,18 +217,6 @@ export default {
       request.get("/static/tags.json").then((res) => {
         this.tagList = res;
       });
-    },
-    //通过userid获取username并赋值
-    initUsername() {
-      let userid = JSON.parse(window.localStorage.getItem("access-userid"));
-      request
-        .get("http://" + window.server.ip + ":9090/userinfo/selectUsername", {
-          params: { userid: userid },
-        })
-        .then((res) => {
-          //初始化文章的作者
-          this.form.author = res.username;
-        });
     },
     load() {
       request

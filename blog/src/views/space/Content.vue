@@ -100,9 +100,7 @@ export default {
   },
   created() {
     this.enterSearch();
-    //初始化用户昵称
-    this.initUsername();
-    this.load();
+    this.loadByName();
   },
   methods: {
     enterSearch() {
@@ -127,16 +125,19 @@ export default {
           this.total = res.data.total;
         });
     },
-    //通过userid获取username并赋值
-    initUsername() {
-      let userid = JSON.parse(window.localStorage.getItem("access-userid"));
+    loadByName() {
+      let username = JSON.parse(window.localStorage.getItem("access-username"));
       request
-        .get("http://" + window.server.ip + ":9090/userinfo/selectUsername", {
-          params: { userid: userid },
+        .get("http://" + window.server.ip + ":9090/article/selectAuthor", {
+          params: {
+            pageNum: this.currentPage,
+            pageSize: this.pageSize,
+            author: username,
+          },
         })
         .then((res) => {
-          //初始化文章的作者
-          this.username = res.username;
+          this.tableData = res.data.records;
+          this.total = res.data.total;
         });
     },
     handleCurrentChange(pageNum) {

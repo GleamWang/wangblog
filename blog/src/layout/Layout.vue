@@ -16,11 +16,13 @@
     <div style="margin:0 auto"><SelfBlock /><WarnBlock /><InfoBlock /><TagBlock /><TimeBlock /></div>
     </div>
   </div>
+  <Footer />
 </template>
 
 <script>
 import Topvideo from "@/components/Topvideo";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import About from "@/components/About";
 import SelfBlock from "@/components/SelfBlock";
 import InfoBlock from "@/components/InfoBlock";
@@ -34,6 +36,7 @@ export default {
   components: {
     Topvideo,
     Header,
+    Footer,
     About,
     SelfBlock,
     InfoBlock,

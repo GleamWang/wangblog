@@ -19,8 +19,6 @@ public interface UserInfoService {
 
     Result update(UserInfo userInfo);
 
-    UserInfo selectUsername(String userid);
-
     Page<UserInfo> findPage(Integer pageNum, Integer pageSize, String search);
 
     Result<UserInfo> deleteUser(String id);

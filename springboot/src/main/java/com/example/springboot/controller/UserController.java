@@ -2,7 +2,6 @@ package com.example.springboot.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.springboot.conf.Result;
-import com.example.springboot.entity.Article;
 import com.example.springboot.entity.User;
 import com.example.springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

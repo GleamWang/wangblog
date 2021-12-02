@@ -297,6 +297,7 @@ router.beforeEach((to, from, next) => {
   if (to.path.startsWith('/login')) {
     window.localStorage.removeItem('access-token')
     window.localStorage.removeItem('access-userid')
+    window.localStorage.removeItem('access-username')
     next()
   }
   else if (to.meta.requireAuth) {// 判断该路由是否需要登录权限

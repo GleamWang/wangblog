@@ -89,13 +89,6 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public UserInfo selectUsername(String userid) {
-        QueryWrapper wrapper = new QueryWrapper();
-        wrapper.eq("userid",userid);
-        return userInfoMapper.selectOne(wrapper);
-    }
-
-    @Override
     public String upload(MultipartFile file) throws IOException {
         //获取源文件名称
         String originalFilename = file.getOriginalFilename();

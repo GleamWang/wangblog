@@ -97,10 +97,12 @@
       </el-tab-pane>
     </el-tabs>
   </div>
+  <Footer />
 </template>
 
 <script>
 import request from "../utils/request";
+import Footer from "@/components/Footer";
 import Topvideo from "@/components/Topvideo";
 import Header from "@/components/Header";
 import Background from "../components/Background.vue";
@@ -110,6 +112,7 @@ export default {
   components: {
     Topvideo,
     Header,
+    Footer,
     Background,
   },
   data() {

@@ -23,12 +23,12 @@ public class AnimationController {
     }
 
     @DeleteMapping("/{id}")
-    public Result update(@PathVariable Long id){
+    public Result update(@PathVariable Long id) {
         return animationService.deleted(id);
     }
 
     @PutMapping
-    public Result update(@RequestBody Animation animation){
+    public Result update(@RequestBody Animation animation) {
         return animationService.update(animation);
     }
 
@@ -39,7 +39,7 @@ public class AnimationController {
     }
 
     @DeleteMapping("/deleteIds")
-    public Result deleteIds(@RequestParam(value = "selection") String[] selection){
+    public Result deleteIds(@RequestParam(value = "selection") String[] selection) {
         return animationService.deleteIds(selection);
     }
 }

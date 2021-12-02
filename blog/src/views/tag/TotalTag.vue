@@ -99,6 +99,6 @@ export default {
   border-radius: 15px;
 }
 .tag {
-  margin: 10px;
+  margin: 20px;
 }
 </style>

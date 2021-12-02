@@ -70,16 +70,19 @@
       </div>
     </div>
   </div>
+  <Footer />
 </template>
 
 <script>
 import request from "../utils/request";
+import Footer from "@/components/Footer";
 import Background from "../components/Background.vue";
 
 export default {
   name: "Login",
   components: {
     Background,
+    Footer,
   },
   data() {
     return {

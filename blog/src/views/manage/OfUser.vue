@@ -254,7 +254,7 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           request
-            .put("http://" + window.server.ip + ":9090/article", this.form)
+            .put("http://" + window.server.ip + ":9090/user", this.form)
             .then((res) => {
               console.log(res);
               if (res.code === "0") {

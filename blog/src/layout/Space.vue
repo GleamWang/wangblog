@@ -62,11 +62,13 @@
       </div>
     </div>
   </div>
+  <Footer />
 </template>
 
 <script>
 import Header from "@/components/Header";
 import About from "@/components/About";
+import Footer from "@/components/Footer";
 import Background from "../components/Background.vue";
 
 export default {
@@ -74,6 +76,7 @@ export default {
   components: {
     Header,
     About,
+    Footer,
     Background,
   },
 };

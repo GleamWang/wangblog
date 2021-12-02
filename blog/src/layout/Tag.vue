@@ -7,24 +7,18 @@
     <Header position="fixed" title="Tag" />
     <About name="标 签" />
   </div>
-  <div style="display: flex; width: 70%; margin: 0 auto">
-    <div style="width: 70%">
+  <div style="width: 60%; margin: 0 auto">
+    <div style="width: 100%">
       <router-view />
     </div>
-    <div style="width: 30%">
-      <div style="margin: 0 auto"><SelfBlock /><WarnBlock /><InfoBlock /><TagBlock /><TimeBlock /></div>
-    </div>
   </div>
+  <Footer />
 </template>
 
 <script>
 import Header from "@/components/Header";
 import About from "@/components/About";
-import SelfBlock from "@/components/SelfBlock";
-import InfoBlock from "@/components/InfoBlock";
-import WarnBlock from "@/components/WarnBlock";
-import TimeBlock from "@/components/TimeBlock";
-import TagBlock from "@/components/TagBlock";
+import Footer from "@/components/Footer";
 import Background from "../components/Background.vue";
 
 export default {
@@ -32,11 +26,7 @@ export default {
   components: {
     Header,
     About,
-    SelfBlock,
-    InfoBlock,
-    WarnBlock,
-    TimeBlock,
-    TagBlock,
+    Footer,
     Background,
   },
 };

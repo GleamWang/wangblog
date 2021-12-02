@@ -28,11 +28,13 @@
       <span v-html="this.article.content2"></span>
     </div>
   </div>
+  <Footer />
 </template>
 
 <script>
 import Background from "../components/Background.vue";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import request from "../utils/request";
 
 export default {
@@ -41,6 +43,7 @@ export default {
   components: {
     Background,
     Header,
+    Footer,
   },
   data() {
     return {

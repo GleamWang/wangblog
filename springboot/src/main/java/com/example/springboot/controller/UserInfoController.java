@@ -2,7 +2,6 @@ package com.example.springboot.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.springboot.conf.Result;
-import com.example.springboot.entity.User;
 import com.example.springboot.entity.UserInfo;
 import com.example.springboot.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,11 +37,6 @@ public class UserInfoController {
     @PutMapping
     public Result update(@RequestBody UserInfo userinfo){
         return userInfoService.update(userinfo);
-    }
-
-    @GetMapping("/selectUsername")
-    public UserInfo selectUsername(@RequestParam("userid") String userid){
-        return userInfoService.selectUsername(userid);
     }
 
     @DeleteMapping("/{userid}")

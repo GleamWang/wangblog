@@ -282,6 +282,8 @@ export default {
         })
         .then((res) => {
           this.userinfo = res;
+          //将username存入localStorage
+          localStorage.setItem("access-username", JSON.stringify(this.userinfo.username));
         });
     }
   },
@@ -297,6 +299,7 @@ export default {
     exit(){
     window.localStorage.removeItem('access-token')
     window.localStorage.removeItem('access-userid')
+    window.localStorage.removeItem('access-username')
     window.location.reload()
     },
     //回车搜索

@@ -135,7 +135,8 @@ public class ArticleServiceImpl implements ArticleService {
     public Page<Article> findPageByAuthor(Integer pageNum, Integer pageSize, String author) {
         LambdaQueryWrapper<Article> wrapper = Wrappers.<Article>lambdaQuery();
         if (StringUtils.isNotBlank(author)) {
-            wrapper.like(Article::getAuthor, author);
+            //准确查询，非模糊查询
+            wrapper.eq(Article::getAuthor, author);
         }
         return articleMapper.selectPage(new Page<Article>(pageNum, pageSize), wrapper);
     }

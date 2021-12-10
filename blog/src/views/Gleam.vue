@@ -105,10 +105,18 @@
           >
             博客在线修改功能
           </div>
-          <div class="text item" style="margin-bottom: 10px">
+          <div
+            class="text item"
+            style="margin-bottom: 10px; text-decoration: line-through"
+          >
             完善主分类页面
           </div>
-          <div class="text item" style="margin-bottom: 10px">完善友链页面</div>
+          <div
+            class="text item"
+            style="margin-bottom: 10px; text-decoration: line-through"
+          >
+            完善主标签页面
+          </div>
           <div class="text item" style="margin-bottom: 10px">增加评论功能</div>
           <div class="text item" style="margin-bottom: 10px">
             实现访问量等数据的可视化
@@ -153,13 +161,25 @@
           >
             不选择封面无法上传博客(原因已定位)
           </div>
+          <div
+            class="text item"
+            style="margin-bottom: 10px; text-decoration: line-through"
+          >
+            写博客时无法复制图片上传
+          </div>
           <div class="text item" style="margin-bottom: 10px">
             修改文章时original绑定的数据无法同步
           </div>
-          <div class="text item" style="margin-bottom: 10px; text-decoration: line-through">
+          <div
+            class="text item"
+            style="margin-bottom: 10px; text-decoration: line-through"
+          >
             内容管理显示数据非本人
           </div>
-          <div class="text item" style="margin-bottom: 10px; text-decoration: line-through">
+          <div
+            class="text item"
+            style="margin-bottom: 10px; text-decoration: line-through"
+          >
             后台管理中修改权限功能失效
           </div>
         </el-card>

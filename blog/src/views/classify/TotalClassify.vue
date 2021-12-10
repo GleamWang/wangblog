@@ -7,24 +7,22 @@
           font-size: 270%;
           font-family: '楷体';
           font-weight: bold;
-          margin-bottom: 10px;
+          width: 60%;
+          margin-top: 25px;
         "
       >
-        #分类-
+        #分类
+        <el-image :src="url" :fit="fit" style="margin-top:30px"></el-image>
       </div>
       <div class="block">
-        <el-timeline>
+        <el-timeline style="margin-top: 25px">
           <el-timeline-item
-            v-for="(activity, index) in activities"
+            v-for="(category, index) in categoryList"
             :key="index"
-            :icon="activity.icon"
-            :type="activity.type"
-            :color="activity.color"
-            :size="activity.size"
-            :hollow="activity.hollow"
-            @click="pushClassify(activity.content)"
+            :hollow="true"
+            @click="pushClassify(category)"
           >
-            {{ activity.content }}
+            <el-button type="success" circle>{{ category }}</el-button>
           </el-timeline-item>
         </el-timeline>
       </div>
@@ -33,42 +31,22 @@
 </template>
 
 <script>
+import request from "@/utils/request";
+
 export default {
   name: "TotalClassify",
   data() {
     return {
-      activities: [
-        {
-          content: "Java",
-          size: "large",
-          type: "primary",
-          icon: "el-icon-more",
-        },
-        {
-          content: "Springboot",
-          color: "#0bbd87",
-        },
-        {
-          content: "MySql",
-          size: "large",
-        },
-        {
-          content: "Linux",
-          type: "primary",
-          hollow: true,
-        },
-        {
-          content: "SpringCloud",
-        },
-        {
-          content: "Redis",
-          color: "#0bbd87",
-        },
-      ],
+      categoryList: [],
+      url: require("@/assets/background/5.jpg"),
+      fit: "cover",
     };
   },
   created() {
     this.$store.commit("newStatus", 1);
+  },
+  mounted() {
+    this.load();
   },
   methods: {
     pushClassify(content) {
@@ -78,6 +56,13 @@ export default {
           category: content,
         },
       });
+    },
+    load() {
+      request
+        .get("http://" + window.server.ip + ":9090/article/selectAllCategory")
+        .then((res) => {
+          this.categoryList = res;
+        });
     },
   },
 };
@@ -93,8 +78,10 @@ export default {
   box-shadow: border-box;
   background: rgba(255, 255, 255, 1);
   border-radius: 15px;
+  display: flex;
 }
 .block {
+  width: 40%;
   margin-left: 30px;
 }
 </style>

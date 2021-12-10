@@ -203,6 +203,9 @@ export default {
       editor = new E("#toolbar-container", "#text-container");
       editor.config.focus = false;
       editor.config.height = 500;
+      editor.config.lineHeights = ['1', '1.15', '1.6', '1.8', '2', '2.5', '3']
+      editor.config.uploadImgServer = "http://" + window.server.ip + ":9090/article/uploads"
+      editor.config.uploadFileName = 'file'
       editor.create();
       this.$watch("value", () => {
         editor.txt.html(this.value);

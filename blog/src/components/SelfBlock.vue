@@ -7,8 +7,8 @@
     <nav style="text-align: center">
       <ul>
         <li><el-button type="text" style="color:black;font-size:105%" size="medium" @click="this.$router.push('/result')">文章<br><br>{{myNum.articleNum}}</el-button></li>
-        <li><el-button type="text" style="color:black;font-size:105%" size="medium" @click="this.$router.push('/result')">分类<br><br>{{myNum.categoryNum}}</el-button></li>
-        <li><el-button type="text" style="color:black;font-size:105%" size="medium" @click="this.$router.push('/result')">标签<br><br>{{myNum.tagNum}}</el-button></li>
+        <li><el-button type="text" style="color:black;font-size:105%" size="medium" @click="this.$router.push('/classify')">分类<br><br>{{myNum.categoryNum}}</el-button></li>
+        <li><el-button type="text" style="color:black;font-size:105%" size="medium" @click="this.$router.push('/tag')">标签<br><br>{{myNum.tagNum}}</el-button></li>
       </ul>
     </nav>
     <div align="center">

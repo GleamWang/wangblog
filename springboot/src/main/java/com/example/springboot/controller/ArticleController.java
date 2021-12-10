@@ -1,9 +1,11 @@
 package com.example.springboot.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.springboot.conf.EditorResult;
 import com.example.springboot.conf.Result;
 import com.example.springboot.entity.Article;
 import com.example.springboot.entity.MyNum;
+import com.example.springboot.entity.Tag;
 import com.example.springboot.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +13,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 @RestController()
 @RequestMapping("/article")
@@ -29,6 +34,17 @@ public class ArticleController {
     public Result<?> upload(MultipartFile file) throws IOException {
         String uploadUrl = articleService.upload(file);
         return Result.success(uploadUrl);
+    }
+
+    @PostMapping("/uploads")
+    public EditorResult<?> uploads(MultipartFile[] file) throws IOException {
+        ArrayList<String> uploadUrls = articleService.uploads(file);
+        return EditorResult.success(uploadUrls);
+    }
+
+    @GetMapping("/files/{flag}")
+    public void getArticleFiles(@PathVariable String flag, HttpServletResponse response) {
+        articleService.getArticleFiles(flag, response);
     }
 
     @GetMapping("/{flag}")
@@ -76,6 +92,16 @@ public class ArticleController {
     @GetMapping("/selectMyNum")
     public MyNum findMyArticleNum(){
         return articleService.findMyArticleNum("Gleam");
+    }
+
+    @GetMapping("/selectAllCategory")
+    public HashSet<String> findAllCategory(){
+        return articleService.findAllCategory();
+    }
+
+    @GetMapping("/selectAllTag")
+    public ArrayList<Tag> findAllTag(){
+        return articleService.findAllTag();
     }
 
     @PutMapping

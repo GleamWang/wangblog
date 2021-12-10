@@ -11,6 +11,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.springboot.conf.Result;
 import com.example.springboot.entity.Article;
 import com.example.springboot.entity.MyNum;
+import com.example.springboot.entity.Tag;
 import com.example.springboot.mapper.ArticleMapper;
 import com.example.springboot.service.ArticleService;
 import org.springframework.beans.factory.annotation.Value;
@@ -132,6 +133,50 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    public HashSet<String> findAllCategory(){
+        HashSet<String> category = new HashSet<String>();
+        QueryWrapper<Article> queryWrapper = new QueryWrapper<>();
+        queryWrapper.select("category");
+        List<Article> list = articleMapper.selectList(queryWrapper);
+        for (Article article: list) {
+            category.add(article.getCategory());
+        }
+        return category;
+    }
+
+    @Override
+    public ArrayList<Tag> findAllTag(){
+        ArrayList<Tag> tagList = new ArrayList<>();
+        HashSet<String> tag = new HashSet<String>();
+        String[] types = {"success","danger","info","warning",""};
+        String[] sizes = {"mini","small","medium"};
+        String[] effects = {"dark","light","plain"};
+        Random random = new Random();
+        QueryWrapper<Article> queryWrapper = new QueryWrapper<>();
+        queryWrapper.select("tag");
+        List<Article> list = articleMapper.selectList(queryWrapper);
+        for (Article article: list) {
+            String[] tags = article.getTag().split(",");
+            for (int i = 0; i < tags.length; i ++)
+            {
+                tag.add(tags[i]);
+            }
+        }
+        for(String item:tag){
+            Tag tag1 = new Tag();
+            tag1.setTagName(item);
+            int rand = random.nextInt(5);
+            tag1.setType(types[rand]);
+            int rand1 = random.nextInt(3);
+            tag1.setSize(sizes[rand1]);
+            int rand2 = random.nextInt(3);
+            tag1.setEffect(effects[rand2]);
+            tagList.add(tag1);
+        }
+        return tagList;
+    }
+
+    @Override
     public Page<Article> findPageByAuthor(Integer pageNum, Integer pageSize, String author) {
         LambdaQueryWrapper<Article> wrapper = Wrappers.<Article>lambdaQuery();
         if (StringUtils.isNotBlank(author)) {
@@ -166,11 +211,53 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    public ArrayList<String> uploads(MultipartFile[] file) throws IOException {
+        ArrayList<String> list = new ArrayList<String>();
+        for(int i=0;i<file.length;i++){
+            //获取源文件名称
+            String originalFilename = file[i].getOriginalFilename();
+            //定义文件唯一标识（前缀）
+            String flag = IdUtil.fastSimpleUUID();
+            //定义文件存储的地址
+            String rootFilePath = System.getProperty("user.dir") + "/files/article/" + flag + "_" + originalFilename;
+            //把文件写入到上传路径
+            FileUtil.writeBytes(file[i].getBytes(), rootFilePath);
+            //返回请求文件下载的地址
+            String uploadUrl = "http://" + ip + ":" + port + "/article/files/" + flag;
+            list.add(uploadUrl);
+        }
+        return list;
+    }
+
+    @Override
     public void getFiles(String flag, HttpServletResponse response) {
         OutputStream os;  // 新建一个输出流对象
         //寻找匹配文件的地址
         ///src/main/resources/cover/
         String basePath = System.getProperty("user.dir") + "/files/cover/";  // 定于文件上传的根路径
+        List<String> fileNames = FileUtil.listFileNames(basePath);  // 获取所有的文件名称
+        String fileName = fileNames.stream().filter(name -> name.contains(flag)).findAny().orElse("");  // 找到跟参数一致的文件
+        try {
+            if (StrUtil.isNotEmpty(fileName)) {
+                response.addHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
+                response.setContentType("application/octet-stream");
+                byte[] bytes = FileUtil.readBytes(basePath + fileName);  // 通过文件的路径读取文件字节流
+                os = response.getOutputStream();   // 通过输出流返回文件
+                os.write(bytes);
+                os.flush();
+                os.close();
+            }
+        } catch (Exception e) {
+            System.out.println("文件下载失败");
+        }
+    }
+
+    @Override
+    public void getArticleFiles(String flag, HttpServletResponse response) {
+        OutputStream os;  // 新建一个输出流对象
+        //寻找匹配文件的地址
+        ///src/main/resources/cover/
+        String basePath = System.getProperty("user.dir") + "/files/article/";  // 定于文件上传的根路径
         List<String> fileNames = FileUtil.listFileNames(basePath);  // 获取所有的文件名称
         String fileName = fileNames.stream().filter(name -> name.contains(flag)).findAny().orElse("");  // 找到跟参数一致的文件
         try {

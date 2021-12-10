@@ -12,67 +12,38 @@
       >
         #标签-
       </div>
-      <el-tag
-        v-for="tag in tags"
-        :key="tag.name"
-        :type="tag.type"
-        :size="tag.size"
-        :effect="tag.effect"
-        class="tag"
-        @click="pushTag(tag.name)"
-      >
-        {{ tag.name }}
-      </el-tag>
+      <div style="width: 80%; margin: 0 auto">
+        <el-tag
+          v-for="tag in tags"
+          :key="tag.tagName"
+          :type="tag.type"
+          :size="tag.size"
+          :effect="tag.effect"
+          class="tag"
+          @click="pushTag(tag.tagName)"
+        >
+          {{ tag.tagName }}
+        </el-tag>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import request from "@/utils/request";
+
 export default {
   name: "TotalTag",
   data() {
     return {
-      tags: [
-        { name: "Springboot", type: "", size: "medium", effect: "dark" },
-        { name: "JVM", type: "success", size: "mini", effect: "light" },
-        { name: "J2EE", type: "info", size: "small", effect: "plain" },
-        { name: "Jar", type: "success", size: "mini", effect: "light" },
-        { name: "Spring", type: "warning", size: "medium", effect: "light" },
-        { name: "Tomcat", type: "danger", size: "small", effect: "plain" },
-        { name: "Springmvc", type: "warning", size: "medium", effect: "dark" },
-        { name: "IDEA", type: "info", size: "mini", effect: "light" },
-        { name: "Hibernate", type: "info", size: "small", effect: "plain" },
-        { name: "SpringCloud", type: "warning", size: "medium", effect: "light" },
-        { name: "Linux", type: "danger", size: "small", effect: "plain" },
-        { name: "JavaScript", type: "warning", size: "mini", effect: "light" },
-        { name: "Vue", type: "danger", size: "medium", effect: "dark" },
-        { name: "Shiro", type: "success", size: "mini", effect: "light" },
-        { name: "Nginx", type: "info", size: "small", effect: "plain" },
-        { name: "Zookeeper", type: "success", size: "mini", effect: "dark" },
-        { name: "CSS", type: "danger", size: "small", effect: "plain" },
-        { name: "Html", type: "warning", size: "mini", effect: "light" },
-        { name: "React", type: "danger", size: "medium", effect: "dark" },
-        { name: "ElementPlus", type: "success", size: "mini", effect: "light" },
-        { name: ".net", type: "success", size: "mini", effect: "light" },
-        { name: "Ajax", type: "info", size: "small", effect: "plain" },
-        { name: "Promise", type: "success", size: "mini", effect: "light" },
-        { name: "Axios", type: "info", size: "mini", effect: "light" },
-        { name: "Netty", type: "info", size: "small", effect: "plain" },
-        { name: "Kafka", type: "", size: "medium", effect: "dark" },
-        { name: "RabbitMQ", type: "success", size: "mini", effect: "light" },
-        { name: "C++", type: "danger", size: "medium", effect: "dark" },
-        { name: "Linux", type: "success", size: "mini", effect: "light" },
-        { name: "C", type: "danger", size: "small", effect: "plain" },
-        { name: "Golang", type: "warning", size: "medium", effect: "dark" },
-        { name: "Python", type: "info", size: "small", effect: "plain" },
-        { name: "C#", type: "info", size: "small", effect: "plain" },
-        { name: "MySQL", type: "success", size: "mini", effect: "dark" },
-        { name: "Redis", type: "danger", size: "medium", effect: "dark" },
-      ],
+      tags: [],
     };
   },
-  created(){
+  created() {
     this.$store.commit("newStatus", 1);
+  },
+  mounted() {
+    this.load();
   },
   methods: {
     pushTag(name) {
@@ -82,6 +53,13 @@ export default {
           tag: name,
         },
       });
+    },
+    load() {
+      request
+        .get("http://" + window.server.ip + ":9090/article/selectAllTag")
+        .then((res) => {
+          this.tags = res;
+        });
     },
   },
 };
@@ -99,6 +77,6 @@ export default {
   border-radius: 15px;
 }
 .tag {
-  margin: 20px;
+  margin: 15px;
 }
 </style>
